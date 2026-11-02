@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Taste Engine — Architectural Brutalism Style System
+   Raw structural honesty, 0px corners, 0ms inversion, zero decorative camouflage
+   ========================================================================== */
+
+[data-taste-style="brutalism"] {
+  --brutal-bg: #ffffff;
+  --brutal-ink: #000000;
+  --brutal-surface: #ffffff;
+  --brutal-border: 2.5px solid #000000;
+  --brutal-radius: 0px;
+  --brutal-signal: #ff0000;
+  --brutal-signal-yellow: #ffd700;
+  --brutal-font-heading: 'Arial Black', Impact, system-ui, sans-serif;
+  --brutal-font-body: Arial, Helvetica, system-ui, sans-serif;
+  --brutal-font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+
+  background-color: var(--brutal-bg);
+  color: var(--brutal-ink);
+  font-family: var(--brutal-font-body);
+}
+
+[data-taste-style="brutalism"][data-theme="dark"] {
+  --brutal-bg: #000000;
+  --brutal-ink: #ffffff;
+  --brutal-surface: #0a0a0a;
+  --brutal-border: 2.5px solid #ffffff;
+  --brutal-signal: #ff3333;
+}
+
+/* Brutalist Structural Card */
+.brutal-card {
+  background-color: var(--brutal-surface);
+  border: var(--brutal-border);
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  padding: 1.5rem;
+}
+
+/* Brutalist Button with 0ms immediate inversion */
+.brutal-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--brutal-ink);
+  color: var(--brutal-bg) !important;
+  border: var(--brutal-border);
+  border-radius: 0px !important;
+  padding: 12px 28px;
+  font-family: var(--brutal-font-heading);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: none !important; /* 0ms immediate */
+  text-decoration: none;
+}
+
+.brutal-btn-primary:hover {
+  background-color: var(--brutal-bg);
+  color: var(--brutal-ink) !important;
+}
+
+.brutal-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--brutal-bg);
+  color: var(--brutal-ink);
+  border: var(--brutal-border);
+  border-radius: 0px !important;
+  padding: 12px 28px;
+  font-family: var(--brutal-font-heading);
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.brutal-btn-secondary:hover {
+  background-color: var(--brutal-ink);
+  color: var(--brutal-bg) !important;
+}
+
+/* Brutalist Input */
+.brutal-input {
+  width: 100%;
+  background-color: var(--brutal-surface);
+  color: var(--brutal-ink);
+  border: var(--brutal-border);
+  border-radius: 0px !important;
+  padding: 12px 16px;
+  font-family: var(--brutal-font-mono);
+  font-size: 1rem;
+  box-shadow: none !important;
+}
+
+.brutal-input:focus {
+  outline: 3px solid var(--brutal-ink);
+  outline-offset: 2px;
+}
+
+/* Brutalist Bracketed Tag */
+.brutal-tag {
+  font-family: var(--brutal-font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brutal-signal);
+}

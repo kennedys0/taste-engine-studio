@@ -1,0 +1,111 @@
+/* ==========================================================================
+   Taste Engine — Bento Grid Style System
+   Asymmetric modular card composition with strict visual weight hierarchy
+   ========================================================================== */
+
+[data-taste-style="bento"] {
+  --bento-bg: #0b0d10;
+  --bento-surface: #15191e;
+  --bento-surface-hover: #1c2128;
+  --bento-border: 1px solid rgba(255, 255, 255, 0.08);
+  --bento-ink: #f3f4f6;
+  --bento-muted: #9ca3af;
+  --bento-accent: #8b5cf6; /* Electric Violet */
+  --bento-radius: 24px;
+  --bento-gap: 20px;
+  --bento-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --bento-font: 'DM Sans', 'Manrope', system-ui, sans-serif;
+
+  background-color: var(--bento-bg);
+  color: var(--bento-ink);
+  font-family: var(--bento-font);
+}
+
+[data-taste-style="bento"][data-theme="light"] {
+  --bento-bg: #f8f9fa;
+  --bento-surface: #ffffff;
+  --bento-surface-hover: #f1f3f5;
+  --bento-border: 1px solid rgba(0, 0, 0, 0.08);
+  --bento-ink: #111827;
+  --bento-muted: #6b7280;
+  --bento-accent: #7c3aed;
+  --bento-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Bento Tile Base */
+.bento-tile {
+  background-color: var(--bento-surface);
+  border: var(--bento-border);
+  border-radius: var(--bento-radius);
+  box-shadow: var(--bento-shadow);
+  padding: 1.75rem;
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+}
+
+/* Bento Button */
+.bento-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--bento-accent);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+  transition: transform 140ms ease-out, opacity 140ms ease-out;
+  text-decoration: none;
+}
+
+.bento-btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.bento-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--bento-ink);
+  border: var(--bento-border);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 140ms ease-out;
+}
+
+.bento-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Bento Input */
+.bento-input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--bento-ink);
+  border: var(--bento-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  transition: border-color 140ms ease-out;
+}
+
+.bento-input:focus {
+  outline: none;
+  border-color: var(--bento-accent);
+}

@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Taste Engine — Enterprise / Data-first Style System
+   High-density operational cockpits, tabular alignment, semantic status tokens
+   ========================================================================== */
+
+[data-taste-style="enterprise"] {
+  --ent-bg: #f9fafb;
+  --ent-surface: #ffffff;
+  --ent-surface-hover: #f3f4f6;
+  --ent-ink: #111827;
+  --ent-muted: #6b7280;
+  --ent-border: 1px solid #e5e7eb;
+  --ent-border-subtle: 1px solid #f3f4f6;
+  --ent-accent: #2563eb;
+  --ent-accent-hover: #1d4ed8;
+  --ent-radius: 6px;
+  --ent-row-height: 36px;
+  --ent-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --ent-font: 'Inter', system-ui, sans-serif;
+  --ent-font-mono: 'JetBrains Mono', monospace;
+
+  background-color: var(--ent-bg);
+  color: var(--ent-ink);
+  font-family: var(--ent-font);
+}
+
+[data-taste-style="enterprise"][data-theme="dark"] {
+  --ent-bg: #0f1117;
+  --ent-surface: #161922;
+  --ent-surface-hover: #1e222e;
+  --ent-ink: #f9fafb;
+  --ent-muted: #9ca3af;
+  --ent-border: 1px solid #232733;
+  --ent-border-subtle: 1px solid #1a1e28;
+  --ent-accent: #3b82f6;
+  --ent-accent-hover: #60a5fa;
+  --ent-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Enterprise Data Table */
+.ent-table-container {
+  background-color: var(--ent-surface);
+  border: var(--ent-border);
+  border-radius: var(--ent-radius);
+  box-shadow: var(--ent-shadow);
+  overflow-x: auto;
+}
+
+.ent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.ent-th {
+  background-color: var(--ent-bg);
+  color: var(--ent-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 16px;
+  border-bottom: var(--ent-border);
+  text-align: left;
+}
+
+.ent-th-num {
+  text-align: right;
+}
+
+.ent-td {
+  padding: 10px 16px;
+  border-bottom: var(--ent-border-subtle);
+  font-variant-numeric: tabular-nums;
+  color: var(--ent-ink);
+}
+
+.ent-td-num {
+  text-align: right;
+  font-family: var(--ent-font-mono);
+}
+
+.ent-tr:hover {
+  background-color: var(--ent-surface-hover);
+}
+
+/* Calibrated WCAG AA Semantic Status Tokens */
+.ent-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ent-status-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.ent-status-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.ent-status-info {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+}
+
+.ent-status-neutral {
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}
+
+[data-taste-style="enterprise"][data-theme="dark"] .ent-status-success {
+  background-color: rgba(6, 95, 70, 0.25);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+[data-taste-style="enterprise"][data-theme="dark"] .ent-status-warning {
+  background-color: rgba(146, 64, 14, 0.25);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.3);
+}
+
+[data-taste-style="enterprise"][data-theme="dark"] .ent-status-info {
+  background-color: rgba(30, 64, 175, 0.25);
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+[data-taste-style="enterprise"][data-theme="dark"] .ent-status-neutral {
+  background-color: rgba(55, 65, 81, 0.25);
+  color: #9ca3af;
+  border-color: rgba(156, 163, 175, 0.3);
+}
+
+/* Enterprise Buttons */
+.ent-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--ent-accent);
+  color: #ffffff !important;
+  border: 1px solid var(--ent-accent);
+  border-radius: var(--ent-radius);
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 100ms;
+  text-decoration: none;
+}
+
+.ent-btn-primary:hover {
+  background-color: var(--ent-accent-hover);
+}
+
+.ent-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--ent-surface);
+  color: var(--ent-ink);
+  border: var(--ent-border);
+  border-radius: var(--ent-radius);
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 100ms;
+}
+
+.ent-btn-secondary:hover {
+  background-color: var(--ent-surface-hover);
+}
+
+/* Enterprise Input with shortcut indicator */
+.ent-input {
+  width: 100%;
+  background-color: var(--ent-surface);
+  color: var(--ent-ink);
+  border: var(--ent-border);
+  border-radius: var(--ent-radius);
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  transition: border-color 100ms;
+}
+
+.ent-input:focus {
+  outline: none;
+  border-color: var(--ent-accent);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.20);
+}

@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Taste Engine — Minimalism Style System
+   Purposeful restraint, active negative space, mathematical type calibration
+   ========================================================================== */
+
+[data-taste-style="minimalism"] {
+  --mini-bg: #fafaf9;
+  --mini-ink: #18181b;
+  --mini-muted: #52525b;
+  --mini-surface: #ffffff;
+  --mini-border: 1px solid rgba(0, 0, 0, 0.08);
+  --mini-border-hover: rgba(0, 0, 0, 0.20);
+  --mini-radius: 8px;
+  --mini-accent: #2563eb;
+  --mini-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --mini-font: 'Inter', system-ui, sans-serif;
+
+  background-color: var(--mini-bg);
+  color: var(--mini-ink);
+  font-family: var(--mini-font);
+}
+
+[data-taste-style="minimalism"][data-theme="dark"] {
+  --mini-bg: #121214;
+  --mini-ink: #f4f4f5;
+  --mini-muted: #a1a1aa;
+  --mini-surface: #18181b;
+  --mini-border: 1px solid rgba(255, 255, 255, 0.10);
+  --mini-border-hover: rgba(255, 255, 255, 0.25);
+  --mini-accent: #60a5fa;
+  --mini-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Minimalist Card */
+.mini-card {
+  background-color: var(--mini-surface);
+  border: var(--mini-border);
+  border-radius: var(--mini-radius);
+  box-shadow: var(--mini-shadow);
+  padding: 1.75rem;
+  transition: border-color 140ms ease-out;
+}
+
+.mini-card:hover {
+  border-color: var(--mini-border-hover);
+}
+
+/* Minimalist Button */
+.mini-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--mini-ink);
+  color: var(--mini-bg) !important;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+  text-decoration: none;
+}
+
+.mini-btn-primary:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.mini-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--mini-ink);
+  border: var(--mini-border);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 140ms ease-out, border-color 140ms ease-out;
+}
+
+.mini-btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  border-color: var(--mini-border-hover);
+}
+
+/* Minimalist Input */
+.mini-input {
+  width: 100%;
+  background-color: var(--mini-surface);
+  color: var(--mini-ink);
+  border: var(--mini-border);
+  border-radius: var(--mini-radius);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  transition: border-color 140ms ease-out;
+}
+
+.mini-input:focus {
+  outline: none;
+  border-color: var(--mini-ink);
+}

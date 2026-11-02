@@ -1,0 +1,57 @@
+/* Master CSS entry */
+@import './styles/tokens.css';
+@import './styles/neo-brutalism.css';
+@import './styles/glassmorphism.css';
+@import './styles/claymorphism.css';
+@import './styles/brutalism.css';
+@import './styles/minimalism.css';
+@import './styles/swiss-editorial.css';
+@import './styles/bento.css';
+@import './styles/skeuomorphism.css';
+@import './styles/retro-terminal.css';
+@import './styles/enterprise.css';
+
+/* Utility layout classes */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #ffe600;
+  color: #121212;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border: 2px solid #121212;
+  border-radius: 4px;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}

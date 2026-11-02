@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Taste Engine — Claymorphism Style System
+   Dual inner-shadow volumetric depth + soft directional ambient drop shadows
+   ========================================================================== */
+
+[data-taste-style="claymorphism"] {
+  --clay-bg: #d7d1f1;
+  --clay-primary: #813ffc;
+  --clay-primary-hover: #7330f0;
+  --clay-light: #ecebf5;
+  --clay-light-hover: #f3f2fa;
+  --clay-text-primary: #ffffff;
+  --clay-text-dark: #28233d;
+  --clay-muted: #6e6592;
+  --clay-well-bg: #d7d1f1;
+  --clay-well-rim: rgba(255, 255, 255, 0.85);
+
+  --clay-shadow-primary: 8px 16px 24px rgba(100, 45, 210, 0.35), 2px 4px 8px rgba(70, 20, 150, 0.20);
+  --clay-inner-primary: inset 3px 4px 6px rgba(255, 255, 255, 0.45), inset -4px -6px 8px rgba(40, 10, 110, 0.40);
+
+  --clay-shadow-light: 8px 16px 24px rgba(110, 95, 160, 0.20), 2px 4px 8px rgba(110, 95, 160, 0.12);
+  --clay-inner-light: inset 3px 4px 6px rgba(255, 255, 255, 0.95), inset -4px -6px 8px rgba(145, 135, 180, 0.35);
+
+  --clay-inner-well: inset 3px 4px 8px rgba(110, 95, 165, 0.25), inset -2px -2px 6px rgba(255, 255, 255, 0.70);
+
+  --clay-radius-pill: 9999px;
+  --clay-radius-btn: 24px;
+  --clay-radius-card: 28px;
+  --clay-radius-squircle: 16px;
+  --clay-font: 'Manrope', system-ui, sans-serif;
+
+  background-color: var(--clay-bg);
+  color: var(--clay-text-dark);
+  font-family: var(--clay-font);
+}
+
+[data-taste-style="claymorphism"][data-theme="dark"] {
+  --clay-bg: #19142b;
+  --clay-primary: #7c3aed;
+  --clay-primary-hover: #6d28d9;
+  --clay-light: #2c2547;
+  --clay-light-hover: #362e57;
+  --clay-text-dark: #f1f0f7;
+  --clay-muted: #a39bc2;
+  --clay-well-bg: #1f1936;
+  --clay-well-rim: rgba(255, 255, 255, 0.18);
+
+  --clay-shadow-primary: 8px 16px 28px rgba(0, 0, 0, 0.55), 2px 4px 8px rgba(0, 0, 0, 0.35);
+  --clay-inner-primary: inset 3px 4px 6px rgba(255, 255, 255, 0.35), inset -4px -6px 8px rgba(15, 8, 35, 0.65);
+
+  --clay-shadow-light: 8px 16px 28px rgba(0, 0, 0, 0.45), 2px 4px 8px rgba(0, 0, 0, 0.30);
+  --clay-inner-light: inset 3px 4px 6px rgba(255, 255, 255, 0.22), inset -4px -6px 8px rgba(10, 8, 20, 0.60);
+
+  --clay-inner-well: inset 3px 4px 8px rgba(0, 0, 0, 0.55), inset -2px -2px 6px rgba(255, 255, 255, 0.12);
+}
+
+/* Sculpted Clay Card */
+.clay-card {
+  background-color: var(--clay-light);
+  border-radius: var(--clay-radius-card);
+  box-shadow: var(--clay-inner-light), var(--clay-shadow-light);
+  padding: 2rem;
+  color: var(--clay-text-dark);
+  position: relative;
+  transition: transform 160ms ease-out;
+}
+
+/* Primary Saturated Clay Button */
+.clay-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--clay-primary);
+  color: var(--clay-text-primary) !important;
+  border: none;
+  border-radius: var(--clay-radius-btn);
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--clay-inner-primary), var(--clay-shadow-primary);
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out, background-color 160ms ease-out;
+  text-decoration: none;
+}
+
+.clay-btn-primary:hover {
+  background-color: var(--clay-primary-hover);
+  transform: translateY(-1px);
+}
+
+.clay-btn-primary:active {
+  transform: scale(0.97) translateY(2px);
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.35),
+              inset -3px -4px 6px rgba(40, 10, 110, 0.55),
+              4px 8px 14px rgba(100, 45, 210, 0.30);
+}
+
+/* Secondary Light Clay Button */
+.clay-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--clay-light);
+  color: var(--clay-text-dark);
+  border: none;
+  border-radius: var(--clay-radius-btn);
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--clay-inner-light), var(--clay-shadow-light);
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+}
+
+.clay-btn-secondary:hover {
+  background-color: var(--clay-light-hover);
+  transform: translateY(-1px);
+}
+
+.clay-btn-secondary:active {
+  transform: scale(0.97) translateY(2px);
+}
+
+/* Sunken Recessed Input Well */
+.clay-input-well {
+  width: 100%;
+  background-color: var(--clay-well-bg);
+  color: var(--clay-text-dark);
+  border: 3px solid var(--clay-well-rim);
+  border-radius: var(--clay-radius-btn);
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--clay-inner-well);
+  transition: border-color 160ms, box-shadow 160ms;
+}
+
+.clay-input-well:focus {
+  outline: none;
+  border-color: var(--clay-primary);
+  box-shadow: var(--clay-inner-well), 0 0 0 3px rgba(129, 63, 252, 0.25);
+}

@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Taste Engine — Glassmorphism Style System
+   Explicit Exception: Purposeful ambient radial gradients and light fields
+   are permitted and required to make frosted translucency and depth visible.
+   ========================================================================== */
+
+[data-taste-style="glassmorphism"] {
+  --glass-surface: rgba(255, 255, 255, 0.42);
+  --glass-edge: rgba(255, 255, 255, 0.70);
+  --glass-ink: #0f1d38;
+  --glass-muted: #3a4b68;
+  --glass-fallback: #edf3fa;
+  --glass-shadow: 0 20px 50px rgba(28, 76, 156, 0.16);
+  --glass-accent: #2563eb;
+  --glass-radius: 24px;
+  --glass-blur: 18px;
+  --glass-font: 'Inter', system-ui, sans-serif;
+
+  color: var(--glass-ink);
+  font-family: var(--glass-font);
+  position: relative;
+  min-height: 100%;
+}
+
+/* Light Milky Glass Ambient Backdrop */
+[data-taste-style="glassmorphism"][data-theme="light"],
+[data-taste-style="glassmorphism"]:not([data-theme="dark"]) {
+  background:
+    radial-gradient(ellipse 55% 50% at 20% 40%, rgba(99, 164, 255, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 45% at 85% 25%, rgba(196, 181, 253, 0.55) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 60% at 50% 90%, rgba(147, 197, 253, 0.40) 0%, transparent 70%),
+    linear-gradient(135deg, #f0f6ff 0%, #e2edfc 50%, #eaf0ff 100%);
+  background-attachment: fixed;
+}
+
+/* Dark Smoked Glass Ambient Backdrop */
+[data-taste-style="glassmorphism"][data-theme="dark"] {
+  --glass-surface: rgba(30, 41, 68, 0.45);
+  --glass-edge: rgba(220, 230, 255, 0.28);
+  --glass-ink: #f8fafc;
+  --glass-muted: #94a3b8;
+  --glass-fallback: #1e293b;
+  --glass-shadow: 0 24px 60px rgba(4, 7, 20, 0.45);
+  --glass-accent: #38bdf8;
+
+  background:
+    radial-gradient(ellipse 50% 50% at 15% 20%, rgba(56, 189, 248, 0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 70%, rgba(168, 85, 247, 0.32) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 45% at 50% 40%, rgba(59, 130, 246, 0.20) 0%, transparent 70%),
+    linear-gradient(135deg, #090e17 0%, #0f172a 50%, #0c1220 100%);
+  background-attachment: fixed;
+}
+
+/* Frosted Glass Panes */
+.glass-pane {
+  position: relative;
+  color: var(--glass-ink);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--glass-radius);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), var(--glass-shadow);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(145%);
+  padding: 1.75rem;
+}
+
+/* Top Specular Edge Line */
+.glass-pane::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+}
+
+/* Glass Buttons */
+.glass-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--glass-accent);
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+  transition: transform 160ms ease-out, box-shadow 160ms ease-out;
+  text-decoration: none;
+}
+
+.glass-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+}
+
+.glass-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.22);
+  color: var(--glass-ink);
+  border: 1px solid var(--glass-edge);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background 160ms ease-out, transform 160ms ease-out;
+}
+
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Glass Inputs */
+.glass-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.30);
+  color: var(--glass-ink);
+  border: 1px solid var(--glass-edge);
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: border-color 160ms, box-shadow 160ms;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--glass-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+/* Fallback for environments lacking backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-pane, .glass-btn-secondary, .glass-input {
+    background: var(--glass-fallback) !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-pane, .glass-btn-secondary, .glass-input {
+    background: var(--glass-fallback) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}

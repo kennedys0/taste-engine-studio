@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Taste Engine — Swiss / Editorial Style System
+   Rigorous grid, extreme type scale contrast, 1px dividing rules, numbered index
+   ========================================================================== */
+
+[data-taste-style="swiss-editorial"] {
+  --swiss-bg: #ffffff;
+  --swiss-ink: #111111;
+  --swiss-muted: #555555;
+  --swiss-surface: #ffffff;
+  --swiss-rule: 1px solid #111111;
+  --swiss-rule-subtle: 1px solid #e0e0e0;
+  --swiss-accent: #e3000f; /* Swiss Red */
+  --swiss-radius: 0px;
+  --swiss-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  background-color: var(--swiss-bg);
+  color: var(--swiss-ink);
+  font-family: var(--swiss-font);
+}
+
+[data-taste-style="swiss-editorial"][data-theme="dark"] {
+  --swiss-bg: #111113;
+  --swiss-ink: #f5f5f7;
+  --swiss-muted: #9999a0;
+  --swiss-surface: #18181b;
+  --swiss-rule: 1px solid #f5f5f7;
+  --swiss-rule-subtle: 1px solid #2a2a2e;
+  --swiss-accent: #ff2a38;
+}
+
+/* Swiss Editorial Card / Section */
+.swiss-card {
+  background-color: var(--swiss-surface);
+  border-top: var(--swiss-rule);
+  border-bottom: var(--swiss-rule-subtle);
+  border-radius: 0px !important;
+  box-shadow: none !important;
+  padding: 2rem 0;
+}
+
+/* Numbered Index Marker */
+.swiss-index {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--swiss-accent);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Swiss Editorial Primary Button */
+.swiss-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--swiss-ink);
+  color: var(--swiss-bg) !important;
+  border: 1px solid var(--swiss-ink);
+  border-radius: 0px !important;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: background-color 120ms ease-out, color 120ms ease-out;
+  text-decoration: none;
+}
+
+.swiss-btn-primary:hover {
+  background-color: var(--swiss-accent);
+  border-color: var(--swiss-accent);
+  color: #ffffff !important;
+}
+
+.swiss-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--swiss-ink);
+  border: 1px solid var(--swiss-ink);
+  border-radius: 0px !important;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none !important;
+  transition: background-color 120ms ease-out, color 120ms ease-out;
+}
+
+.swiss-btn-secondary:hover {
+  background-color: var(--swiss-ink);
+  color: var(--swiss-bg) !important;
+}
+
+/* Swiss Input */
+.swiss-input {
+  width: 100%;
+  background-color: transparent;
+  color: var(--swiss-ink);
+  border: none;
+  border-bottom: 2px solid var(--swiss-ink);
+  border-radius: 0px !important;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: none !important;
+}
+
+.swiss-input:focus {
+  outline: none;
+  border-bottom-color: var(--swiss-accent);
+}

@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Taste Engine — Skeuomorphism Style System
+   Top-down specular lighting, metallic multi-stop gradients, sunken wells, mechanical travel
+   ========================================================================== */
+
+[data-taste-style="skeuomorphism"] {
+  --skeuo-chassis: linear-gradient(180deg, #323741 0%, #262a32 100%);
+  --skeuo-panel-border: 1px solid #14171c;
+  --skeuo-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  --skeuo-btn-bg: linear-gradient(180deg, #414754 0%, #2b3039 100%);
+  --skeuo-btn-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.40), inset 0 -1px 0 rgba(0, 0, 0, 0.60);
+  --skeuo-btn-shadow: 0 4px 10px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.40);
+  --skeuo-well: inset 0 3px 6px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.12);
+  --skeuo-ink: #e2e8f0;
+  --skeuo-muted: #94a3b8;
+  --skeuo-bg: #1a1c22;
+  --skeuo-led-green: #10b981;
+  --skeuo-led-amber: #ffae00;
+  --skeuo-radius: 12px;
+  --skeuo-font: 'IBM Plex Sans', system-ui, sans-serif;
+  --skeuo-font-mono: 'IBM Plex Mono', monospace;
+
+  background-color: var(--skeuo-bg);
+  color: var(--skeuo-ink);
+  font-family: var(--skeuo-font);
+}
+
+[data-taste-style="skeuomorphism"][data-theme="light"] {
+  --skeuo-chassis: linear-gradient(180deg, #edf0f5 0%, #d8dde6 100%);
+  --skeuo-panel-border: 1px solid #b8bec9;
+  --skeuo-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --skeuo-btn-bg: linear-gradient(180deg, #ffffff 0%, #d5dae2 100%);
+  --skeuo-btn-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+  --skeuo-btn-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.10);
+  --skeuo-well: inset 0 3px 6px rgba(0, 0, 0, 0.20), 0 1px 0 rgba(255, 255, 255, 0.80);
+  --skeuo-ink: #1e293b;
+  --skeuo-muted: #64748b;
+  --skeuo-bg: #e2e7ef;
+}
+
+/* Skeuomorphic Hardware Panel */
+.skeuo-panel {
+  background: var(--skeuo-chassis);
+  border: var(--skeuo-panel-border);
+  border-radius: var(--skeuo-radius);
+  box-shadow: var(--skeuo-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
+  padding: 1.75rem;
+  position: relative;
+}
+
+/* Tactile Push Button */
+.skeuo-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--skeuo-btn-bg);
+  color: var(--skeuo-ink) !important;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--skeuo-btn-bevel), var(--skeuo-btn-shadow);
+  transition: transform 120ms ease-out, box-shadow 120ms ease-out;
+  text-decoration: none;
+}
+
+.skeuo-btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.70), 0 1px 2px rgba(0, 0, 0, 0.30);
+}
+
+/* Sunken Well Input / Screen */
+.skeuo-well {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--skeuo-ink);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: var(--skeuo-font-mono);
+  font-size: 0.95rem;
+  box-shadow: var(--skeuo-well);
+  transition: border-color 140ms ease-out;
+}
+
+.skeuo-well:focus {
+  outline: none;
+  border-color: var(--skeuo-led-green);
+  box-shadow: var(--skeuo-well), 0 0 8px rgba(16, 185, 129, 0.40);
+}
+
+/* LED Jewel Indicator */
+.skeuo-led {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--skeuo-led-green);
+  box-shadow: 0 0 8px var(--skeuo-led-green), inset 0 1px 1px rgba(255, 255, 255, 0.65);
+}

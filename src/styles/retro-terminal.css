@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Taste Engine — Retro Terminal Style System
+   Obsidian background, CRT raster scanlines, phosphor glow, ASCII bracket framing
+   ========================================================================== */
+
+[data-taste-style="retro-terminal"] {
+  --term-bg: #0c0d0e;
+  --term-surface: #14171a;
+  --term-amber: #ffb000;
+  --term-amber-glow: 0 0 6px rgba(255, 176, 0, 0.45);
+  --term-green: #33ff33;
+  --term-border: 1px solid rgba(255, 176, 0, 0.28);
+  --term-scanline: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, transparent 2px);
+  --term-ink: #ffb000;
+  --term-muted: #c28805;
+  --term-radius: 3px;
+  --term-font: 'JetBrains Mono', 'IBM Plex Mono', monospace;
+
+  background-color: var(--term-bg);
+  background-image: var(--term-scanline);
+  color: var(--term-ink);
+  font-family: var(--term-font);
+  text-shadow: var(--term-amber-glow);
+}
+
+[data-taste-style="retro-terminal"][data-theme="light"] {
+  --term-bg: #f4f1ea;
+  --term-surface: #eae5da;
+  --term-amber: #7c4a03;
+  --term-amber-glow: none;
+  --term-border: 1px solid rgba(124, 74, 3, 0.35);
+  --term-scanline: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.04) 0px, transparent 2px);
+  --term-ink: #523102;
+  --term-muted: #8c5b16;
+}
+
+/* Terminal Window Frame */
+.term-window {
+  background-color: var(--term-surface);
+  border: var(--term-border);
+  border-radius: var(--term-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.term-header {
+  background-color: rgba(255, 176, 0, 0.10);
+  border-bottom: var(--term-border);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Terminal Buttons */
+.term-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--term-ink) !important;
+  border: var(--term-border);
+  border-radius: var(--term-radius);
+  padding: 10px 24px;
+  font-family: var(--term-font);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 80ms, color 80ms;
+  text-decoration: none;
+  text-shadow: var(--term-amber-glow);
+}
+
+.term-btn-primary:hover {
+  background-color: var(--term-ink);
+  color: #0c0d0e !important;
+  text-shadow: none;
+}
+
+.term-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: var(--term-muted);
+  border: 1px dashed rgba(255, 176, 0, 0.25);
+  border-radius: var(--term-radius);
+  padding: 10px 24px;
+  font-family: var(--term-font);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 80ms, color 80ms;
+}
+
+.term-btn-secondary:hover {
+  color: var(--term-ink);
+  border-color: var(--term-ink);
+}
+
+/* Terminal Input */
+.term-input {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
+  color: var(--term-ink);
+  border: var(--term-border);
+  border-radius: var(--term-radius);
+  padding: 10px 14px;
+  font-family: var(--term-font);
+  font-size: 0.95rem;
+  text-shadow: var(--term-amber-glow);
+}
+
+.term-input:focus {
+  outline: none;
+  border-color: var(--term-amber);
+  box-shadow: 0 0 8px rgba(255, 176, 0, 0.35);
+}
+
+/* Prompt Line */
+.term-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.term-prompt-user {
+  color: var(--term-green);
+  font-weight: 700;
+}
