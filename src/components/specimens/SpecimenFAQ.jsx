@@ -174,3 +174,4 @@ export default function SpecimenFAQ({ styleId = 'neo-brutalism', items = FAQ_ITE
     </div>
   );
 }
+

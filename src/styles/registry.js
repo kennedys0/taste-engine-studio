@@ -203,3 +203,4 @@ export function isValidStyle(id) {
 export function getStyle(id) {
   return STYLE_MAP.get(id) || null;
 }
+

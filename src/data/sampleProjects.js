@@ -129,3 +129,4 @@ export const SAMPLE_PROJECTS = [
 
 export const CATEGORIES = ['All', 'Visual QA', 'Accessibility', 'Interaction', 'Layout', 'Engineering', 'Documentation'];
 export const STATUSES = ['All', 'Active', 'In Review', 'Completed', 'Planned'];
+

@@ -58,3 +58,4 @@ export const FOOTER_LINKS = {
     { label: 'GitHub Repository', href: 'https://github.com/kennedys0/taste-engine', external: true },
   ]
 };
+

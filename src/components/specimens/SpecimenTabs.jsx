@@ -125,3 +125,4 @@ export default function SpecimenTabs({ styleId = 'neo-brutalism' }) {
     </div>
   );
 }
+

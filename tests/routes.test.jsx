@@ -59,3 +59,4 @@ describe('Canonical Style Registry & Route Verification', () => {
     expect(resolveStyleId('random-gibberish')).toBeNull();
   });
 });
+

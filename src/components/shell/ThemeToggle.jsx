@@ -31,3 +31,4 @@ export default function ThemeToggle({ className = '', styleId = null }) {
     </button>
   );
 }
+

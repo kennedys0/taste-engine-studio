@@ -58,3 +58,4 @@ describe('Glassmorphism Material Fidelity Quality Gate', () => {
     expect(screen.getByRole('heading', { level: 1, name: styleObj.name })).toBeInTheDocument();
   });
 });
+

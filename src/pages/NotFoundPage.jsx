@@ -93,3 +93,4 @@ export default function NotFoundPage({ requestedPath = null, isUnknownStyle = fa
     </div>
   );
 }
+

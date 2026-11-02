@@ -55,3 +55,4 @@ export const FAQ_ITEMS = [
     answer: 'Taste Engine is open source on GitHub under the MIT License (kennedys0/taste-engine). You can propose new style packs, refine anti-slop rules, improve engineering references, or submit bug fixes via GitHub Pull Requests.'
   }
 ];
+

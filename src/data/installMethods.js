@@ -66,3 +66,4 @@ export const VERIFICATION_STEPS = [
     expected: 'Agent should preserve your approved project design system and tokens; it should not interrupt with a style selection menu for minor incremental fixes.'
   }
 ];
+

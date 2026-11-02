@@ -18,3 +18,4 @@ export function usePageMetadata(title, description) {
     }
   }, [title, description]);
 }
+
