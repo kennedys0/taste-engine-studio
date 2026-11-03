@@ -115,7 +115,7 @@ export default function SpecimenForm({ styleId = 'neo-brutalism' }) {
       case 'minimalism': return 'mini-btn-secondary';
       case 'swiss-editorial': return 'swiss-btn-secondary';
       case 'bento': return 'bento-btn-secondary';
-      case 'skeuomorphism': return 'skeuo-btn-primary';
+      case 'skeuomorphism': return 'skeuo-btn-secondary';
       case 'retro-terminal': return 'term-btn-secondary';
       case 'enterprise': return 'ent-btn-secondary';
       default: return 'neo-btn-secondary';

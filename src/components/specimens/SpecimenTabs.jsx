@@ -73,8 +73,61 @@ export default function SpecimenTabs({ styleId = 'neo-brutalism' }) {
               color: isActive ? 'var(--brutal-bg)' : 'var(--brutal-ink)',
               border: 'var(--brutal-border)',
             };
+          } else if (styleId === 'skeuomorphism') {
+            tabStyle = {
+              ...tabStyle,
+              background: isActive ? 'var(--skeuo-btn-bg)' : 'rgba(0,0,0,0.06)',
+              color: 'var(--skeuo-ink)',
+              border: '1px solid rgba(0, 0, 0, 0.3)',
+              borderRadius: '8px',
+              boxShadow: isActive ? 'var(--skeuo-btn-bevel), var(--skeuo-btn-shadow)' : 'inset 0 1px 2px rgba(0,0,0,0.15)',
+            };
+          } else if (styleId === 'retro-terminal') {
+            tabStyle = {
+              ...tabStyle,
+              backgroundColor: isActive ? 'var(--term-ink)' : 'transparent',
+              color: isActive ? 'var(--term-surface)' : 'var(--term-ink)',
+              border: 'var(--term-border)',
+              borderRadius: '2px',
+            };
+          } else if (styleId === 'enterprise') {
+            tabStyle = {
+              ...tabStyle,
+              backgroundColor: isActive ? 'var(--ent-surface)' : 'transparent',
+              color: isActive ? 'var(--ent-primary)' : 'var(--ent-ink)',
+              border: isActive ? 'var(--ent-border)' : '1px solid transparent',
+              borderRadius: '6px',
+              boxShadow: isActive ? 'var(--ent-shadow)' : 'none',
+            };
+          } else if (styleId === 'bento') {
+            tabStyle = {
+              ...tabStyle,
+              backgroundColor: isActive ? 'var(--bento-surface)' : 'transparent',
+              color: 'var(--bento-ink)',
+              border: isActive ? 'var(--bento-border)' : '1px solid transparent',
+              borderRadius: '12px',
+              boxShadow: isActive ? 'var(--bento-shadow)' : 'none',
+            };
+          } else if (styleId === 'swiss-editorial') {
+            tabStyle = {
+              ...tabStyle,
+              backgroundColor: 'transparent',
+              color: 'var(--swiss-ink)',
+              border: 'none',
+              borderBottom: isActive ? '3px solid currentColor' : '3px solid transparent',
+              borderRadius: '0px',
+            };
+          } else if (styleId === 'minimalism') {
+            tabStyle = {
+              ...tabStyle,
+              backgroundColor: 'transparent',
+              color: 'var(--mini-ink)',
+              border: 'none',
+              borderBottom: isActive ? '2px solid currentColor' : '2px solid transparent',
+              borderRadius: '0px',
+            };
           } else {
-            // default / minimalism / enterprise / bento / retro-terminal / swiss
+            // fallback
             tabStyle = {
               ...tabStyle,
               backgroundColor: isActive ? 'rgba(125, 125, 125, 0.15)' : 'transparent',

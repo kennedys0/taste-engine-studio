@@ -114,8 +114,24 @@ export default function AuthDemoPage() {
     }
   };
 
+  const getCardClass = () => {
+    switch (styleObj.id) {
+      case 'glassmorphism': return 'glass-pane';
+      case 'claymorphism': return 'clay-card';
+      case 'brutalism': return 'brutal-card';
+      case 'minimalism': return 'mini-card';
+      case 'swiss-editorial': return 'swiss-card';
+      case 'bento': return 'bento-tile';
+      case 'skeuomorphism': return 'skeuo-panel';
+      case 'retro-terminal': return 'term-window';
+      case 'enterprise': return 'ent-card';
+      default: return 'neo-card';
+    }
+  };
+
   const inputClass = getInputClass();
   const btnClass = getButtonClass();
+  const cardClass = getCardClass();
 
   return (
     <div
@@ -151,7 +167,7 @@ export default function AuthDemoPage() {
 
       {/* Main Auth Card */}
       <div
-        className={styleObj.id === 'glassmorphism' ? 'glass-pane' : styleObj.id === 'claymorphism' ? 'clay-card' : styleObj.id === 'brutalism' ? 'brutal-card' : 'neo-card'}
+        className={cardClass}
         style={{
           width: '100%',
           maxWidth: '440px',

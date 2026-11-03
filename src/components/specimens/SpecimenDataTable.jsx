@@ -74,6 +74,8 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
     if (isGlass) return 'glass-pane';
     if (isBrutal) return 'brutal-card';
     if (isClay) return 'clay-card';
+    if (styleId === 'minimalism') return 'mini-card';
+    if (styleId === 'swiss-editorial') return 'swiss-card';
     if (styleId === 'bento') return 'bento-tile';
     if (styleId === 'skeuomorphism') return 'skeuo-panel';
     if (styleId === 'retro-terminal') return 'term-window';

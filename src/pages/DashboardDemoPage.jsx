@@ -38,6 +38,55 @@ export default function DashboardDemoPage() {
   const inReviewTasks = SAMPLE_PROJECTS.filter((p) => p.status === 'In Review').length;
   const activeTasks = SAMPLE_PROJECTS.filter((p) => p.status === 'Active').length;
 
+  const getPrimaryBtnClass = () => {
+    switch (styleObj.id) {
+      case 'glassmorphism': return 'glass-btn-primary';
+      case 'claymorphism': return 'clay-btn-primary';
+      case 'brutalism': return 'brutal-btn-primary';
+      case 'minimalism': return 'mini-btn-primary';
+      case 'swiss-editorial': return 'swiss-btn-primary';
+      case 'bento': return 'bento-btn-primary';
+      case 'skeuomorphism': return 'skeuo-btn-primary';
+      case 'retro-terminal': return 'term-btn-primary';
+      case 'enterprise': return 'ent-btn-primary';
+      default: return 'neo-btn-primary';
+    }
+  };
+
+  const getSecondaryBtnClass = () => {
+    switch (styleObj.id) {
+      case 'glassmorphism': return 'glass-btn-secondary';
+      case 'claymorphism': return 'clay-btn-secondary';
+      case 'brutalism': return 'brutal-btn-secondary';
+      case 'minimalism': return 'mini-btn-secondary';
+      case 'swiss-editorial': return 'swiss-btn-secondary';
+      case 'bento': return 'bento-btn-secondary';
+      case 'skeuomorphism': return 'skeuo-btn-secondary';
+      case 'retro-terminal': return 'term-btn-secondary';
+      case 'enterprise': return 'ent-btn-secondary';
+      default: return 'neo-btn-secondary';
+    }
+  };
+
+  const getCardClass = () => {
+    switch (styleObj.id) {
+      case 'glassmorphism': return 'glass-pane';
+      case 'claymorphism': return 'clay-card';
+      case 'brutalism': return 'brutal-card';
+      case 'minimalism': return 'mini-card';
+      case 'swiss-editorial': return 'swiss-card';
+      case 'bento': return 'bento-tile';
+      case 'skeuomorphism': return 'skeuo-panel';
+      case 'retro-terminal': return 'term-window';
+      case 'enterprise': return 'ent-card';
+      default: return 'neo-card';
+    }
+  };
+
+  const cardClass = getCardClass();
+  const primaryBtnClass = getPrimaryBtnClass();
+  const secondaryBtnClass = getSecondaryBtnClass();
+
   const handleSaveSettings = () => {
     setSavedLocallyNote(true);
     setTimeout(() => setSavedLocallyNote(false), 2500);
@@ -79,7 +128,7 @@ export default function DashboardDemoPage() {
             <button
               type="button"
               onClick={() => setSettingsOpen(true)}
-              className={styleObj.id === 'neo-brutalism' ? 'neo-btn-secondary' : 'mini-btn-secondary'}
+              className={secondaryBtnClass}
               style={{ padding: '8px 16px', fontSize: '0.875rem' }}
             >
               <Settings size={16} />
@@ -142,7 +191,7 @@ export default function DashboardDemoPage() {
         }}
       >
         <div
-          className={styleObj.id === 'glassmorphism' ? 'glass-pane' : styleObj.id === 'claymorphism' ? 'clay-card' : styleObj.id === 'brutalism' ? 'brutal-card' : 'neo-card'}
+          className={cardClass}
           style={{ padding: '1.5rem' }}
         >
           <span style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.75, textTransform: 'uppercase' }}>
@@ -157,7 +206,7 @@ export default function DashboardDemoPage() {
         </div>
 
         <div
-          className={styleObj.id === 'glassmorphism' ? 'glass-pane' : styleObj.id === 'claymorphism' ? 'clay-card' : styleObj.id === 'brutalism' ? 'brutal-card' : 'neo-card'}
+          className={cardClass}
           style={{ padding: '1.5rem' }}
         >
           <span style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.75, textTransform: 'uppercase' }}>
@@ -172,7 +221,7 @@ export default function DashboardDemoPage() {
         </div>
 
         <div
-          className={styleObj.id === 'glassmorphism' ? 'glass-pane' : styleObj.id === 'claymorphism' ? 'clay-card' : styleObj.id === 'brutalism' ? 'brutal-card' : 'neo-card'}
+          className={cardClass}
           style={{ padding: '1.5rem' }}
         >
           <span style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.75, textTransform: 'uppercase' }}>
@@ -187,7 +236,7 @@ export default function DashboardDemoPage() {
         </div>
 
         <div
-          className={styleObj.id === 'glassmorphism' ? 'glass-pane' : styleObj.id === 'claymorphism' ? 'clay-card' : styleObj.id === 'brutalism' ? 'brutal-card' : 'neo-card'}
+          className={cardClass}
           style={{ padding: '1.5rem' }}
         >
           <span style={{ fontSize: '0.8rem', fontWeight: '700', opacity: 0.75, textTransform: 'uppercase' }}>
@@ -289,22 +338,15 @@ export default function DashboardDemoPage() {
               <button
                 type="button"
                 onClick={() => setSettingsOpen(false)}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: '4px',
-                  border: '1px solid currentColor',
-                  fontSize: '0.875rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  backgroundColor: 'transparent',
-                }}
+                className={secondaryBtnClass}
+                style={{ padding: '8px 16px', fontSize: '0.875rem' }}
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleSaveSettings}
-                className="neo-btn-primary"
+                className={primaryBtnClass}
                 style={{ padding: '8px 18px', fontSize: '0.875rem' }}
               >
                 Save Preferences (Local)

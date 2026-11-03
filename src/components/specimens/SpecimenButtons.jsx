@@ -25,7 +25,7 @@ export default function SpecimenButtons({ styleId = 'neo-brutalism' }) {
       case 'bento':
         return { primary: 'bento-btn-primary', secondary: 'bento-btn-secondary' };
       case 'skeuomorphism':
-        return { primary: 'skeuo-btn-primary', secondary: 'skeuo-btn-primary' };
+        return { primary: 'skeuo-btn-primary', secondary: 'skeuo-btn-secondary' };
       case 'retro-terminal':
         return { primary: 'term-btn-primary', secondary: 'term-btn-secondary' };
       case 'enterprise':

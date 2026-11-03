@@ -13,6 +13,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { STYLE_IDS, getStyle } from '../styles/registry';
+import { getStyleThemeClasses } from '../utils/styleTheme';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import SpecimenImageCard from '../components/specimens/SpecimenImageCard';
 import SpecimenButtons from '../components/specimens/SpecimenButtons';
@@ -23,6 +24,7 @@ import SpecimenForm from '../components/specimens/SpecimenForm';
 export default function StyleOverviewPage() {
   const context = useOutletContext() || {};
   const styleObj = context.styleObj || getStyle('neo-brutalism');
+  const themeClasses = getStyleThemeClasses(styleObj.id);
   const currentIndex = STYLE_IDS.indexOf(styleObj.id);
   const prevStyleId = STYLE_IDS[(currentIndex - 1 + STYLE_IDS.length) % STYLE_IDS.length];
   const nextStyleId = STYLE_IDS[(currentIndex + 1) % STYLE_IDS.length];
@@ -545,22 +547,22 @@ export default function StyleOverviewPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-            <div className="neo-card" style={{ padding: '1.5rem' }}>
+            <div className={themeClasses.card} style={{ padding: '1.5rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Typography</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.typography}</p>
             </div>
 
-            <div className="neo-card" style={{ padding: '1.5rem' }}>
+            <div className={themeClasses.card} style={{ padding: '1.5rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Material Fidelity Gate</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.materialFidelityGate}</p>
             </div>
 
-            <div className="neo-card" style={{ padding: '1.5rem' }}>
+            <div className={themeClasses.card} style={{ padding: '1.5rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Motion Personality</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.motionPersonality}</p>
             </div>
 
-            <div className="neo-card" style={{ padding: '1.5rem' }}>
+            <div className={themeClasses.card} style={{ padding: '1.5rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Anti-Slop Exception</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.antiSlopException}</p>
             </div>
@@ -580,7 +582,7 @@ export default function StyleOverviewPage() {
                 Curated Interactive Specimens
               </h2>
             </div>
-            <Link to={`/${styleObj.id}/playground`} className="neo-btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
+            <Link to={`/${styleObj.id}/playground`} className={themeClasses.btnPrimary} style={{ padding: '8px 18px', fontSize: '0.85rem' }}>
               <span>Open Full Playground</span>
               <ArrowRight size={14} />
             </Link>

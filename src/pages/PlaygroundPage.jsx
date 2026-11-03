@@ -26,6 +26,7 @@ import {
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { SPECIMEN_CATEGORIES } from '../data/specimenCatalog';
 import { STYLES, getStyle } from '../styles/registry';
+import { getStyleThemeClasses } from '../utils/styleTheme';
 import SpecimenButtons from '../components/specimens/SpecimenButtons';
 import SpecimenTabs from '../components/specimens/SpecimenTabs';
 import SpecimenForm from '../components/specimens/SpecimenForm';
@@ -110,12 +111,17 @@ function getStageStyle(styleId) {
         boxShadow: 'var(--mini-shadow, 0 1px 3px rgba(0, 0, 0, 0.04))',
       };
     case 'neo-brutalism':
+      return {
+        backgroundColor: 'var(--neo-card, #ffffff)',
+        border: 'var(--neo-border, 2.5px solid #121212)',
+        boxShadow: 'var(--neo-shadow-sm, 3px 3px 0 #121212)',
+        borderRadius: 'var(--neo-radius, 6px)',
+      };
     default:
       return {
         backgroundColor: 'var(--site-card, #ffffff)',
-        border: 'var(--site-border, 2.5px solid #121212)',
-        boxShadow: 'var(--site-shadow-sm, 3px 3px 0 #121212)',
-        borderRadius: 'var(--site-radius, 6px)',
+        border: '1px solid rgba(125, 125, 125, 0.2)',
+        borderRadius: '8px',
       };
   }
 }
@@ -143,6 +149,7 @@ function getCategoryIcon(id) {
 export default function PlaygroundPage() {
   const context = useOutletContext() || {};
   const styleObj = context.styleObj || getStyle('neo-brutalism');
+  const themeClasses = getStyleThemeClasses(styleObj.id);
   const navigate = useNavigate();
 
   usePageMetadata(
@@ -190,11 +197,11 @@ export default function PlaygroundPage() {
             </div>
           </div>
 
-          {/* Quick Subroute Action Pills */}
+          {/* Quick Subroute Action Pills: using authentic style-specific primary/secondary buttons */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem', alignItems: 'center' }}>
             <Link
               to={`/${styleObj.id}/login`}
-              className="neo-btn-secondary"
+              className={themeClasses.btnSecondary}
               style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="Inspect dedicated full-screen authentication experience"
             >
@@ -203,7 +210,7 @@ export default function PlaygroundPage() {
             </Link>
             <Link
               to={`/${styleObj.id}/dashboard`}
-              className="neo-btn-secondary"
+              className={themeClasses.btnSecondary}
               style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="Inspect dense operational dashboard experience"
             >
@@ -212,7 +219,7 @@ export default function PlaygroundPage() {
             </Link>
             <Link
               to={`/${styleObj.id}`}
-              className="neo-btn-primary"
+              className={themeClasses.btnPrimary}
               style={{ padding: '8px 16px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="View full style overview and architectural specification"
             >
@@ -222,15 +229,14 @@ export default function PlaygroundPage() {
           </div>
         </div>
 
-        {/* Live 10-Style Fast Switcher Track: Constant 700 weight ensures zero horizontal button shifts */}
+        {/* Live 10-Style Fast Switcher Track: Neutral chrome ensures zero cross-style contamination */}
         <div
           style={{
             marginTop: '1.25rem',
             padding: '8px 12px',
-            backgroundColor: 'var(--site-card)',
-            border: 'var(--site-border)',
-            borderRadius: 'var(--site-radius)',
-            boxShadow: 'var(--site-shadow-sm)',
+            backgroundColor: 'rgba(125, 125, 125, 0.06)',
+            border: '1px solid rgba(125, 125, 125, 0.2)',
+            borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
@@ -239,7 +245,7 @@ export default function PlaygroundPage() {
           }}
         >
           <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', opacity: 0.75, marginRight: '4px' }}>
-            Switch Style:
+            Style:
           </span>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'nowrap' }}>
             {STYLES.map((s) => {
@@ -273,8 +279,10 @@ export default function PlaygroundPage() {
 
       {/* =========================================================================
           2. Unified Control Toolbar (Viewport, State, Reset)
+             Uses active style's authentic card container and button classes
           ========================================================================= */}
       <div
+        className={themeClasses.card}
         style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -282,15 +290,11 @@ export default function PlaygroundPage() {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0.875rem 1.25rem',
-          backgroundColor: 'var(--site-card)',
-          border: 'var(--site-border)',
-          borderRadius: 'var(--site-radius)',
-          boxShadow: 'var(--site-shadow-sm)',
           marginBottom: '1.75rem',
           fontFamily: 'var(--site-font-body)',
         }}
       >
-        {/* Viewport Simulation Controls with constant font-weight 700 */}
+        {/* Viewport Simulation Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <span style={{ fontSize: '0.825rem', fontWeight: '700', marginRight: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Viewport:
@@ -298,7 +302,7 @@ export default function PlaygroundPage() {
           <button
             type="button"
             onClick={() => setViewportPreset('100%')}
-            className={viewportPreset === '100%' ? 'neo-btn-primary' : 'neo-btn-secondary'}
+            className={viewportPreset === '100%' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
             style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Full Width Responsive Fluid Canvas"
           >
@@ -308,7 +312,7 @@ export default function PlaygroundPage() {
           <button
             type="button"
             onClick={() => setViewportPreset('768px')}
-            className={viewportPreset === '768px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
+            className={viewportPreset === '768px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
             style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Tablet Width Simulator (768px)"
           >
@@ -318,7 +322,7 @@ export default function PlaygroundPage() {
           <button
             type="button"
             onClick={() => setViewportPreset('390px')}
-            className={viewportPreset === '390px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
+            className={viewportPreset === '390px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
             style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Mobile Width Simulator (390px)"
           >
@@ -328,7 +332,7 @@ export default function PlaygroundPage() {
           <button
             type="button"
             onClick={() => setViewportPreset('320px')}
-            className={viewportPreset === '320px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
+            className={viewportPreset === '320px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
             style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Narrow Mobile Simulator (320px)"
           >
@@ -347,12 +351,9 @@ export default function PlaygroundPage() {
               id="state-switcher"
               value={feedbackState}
               onChange={(e) => setFeedbackState(e.target.value)}
+              className={themeClasses.input}
               style={{
                 padding: '6px 10px',
-                borderRadius: 'var(--site-radius)',
-                border: 'var(--site-border)',
-                backgroundColor: 'var(--site-bg)',
-                color: 'var(--site-ink)',
                 fontSize: '0.825rem',
                 fontWeight: '700',
                 cursor: 'pointer',
@@ -369,7 +370,7 @@ export default function PlaygroundPage() {
           <button
             type="button"
             onClick={handleReset}
-            className="neo-btn-secondary"
+            className={themeClasses.btnSecondary}
             style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Reset playground viewports, states, and filters"
           >
@@ -381,6 +382,7 @@ export default function PlaygroundPage() {
 
       {/* =========================================================================
           3. Category Filter Navigation (11 Complete Categories)
+             Styled with authentic active/inactive buttons of the selected style
           ========================================================================= */}
       <div
         role="tablist"
@@ -400,7 +402,7 @@ export default function PlaygroundPage() {
           role="tab"
           aria-selected={activeCategory === 'all'}
           onClick={() => setActiveCategory('all')}
-          className={activeCategory === 'all' ? 'neo-btn-primary' : 'neo-btn-secondary'}
+          className={activeCategory === 'all' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
           style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
         >
           <Sparkles size={14} />
@@ -417,7 +419,7 @@ export default function PlaygroundPage() {
               role="tab"
               aria-selected={isSelected}
               onClick={() => setActiveCategory(cat.id)}
-              className={isSelected ? 'neo-btn-primary' : 'neo-btn-secondary'}
+              className={isSelected ? themeClasses.btnPrimary : themeClasses.btnSecondary}
               style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title={cat.desc}
             >
@@ -518,7 +520,7 @@ export default function PlaygroundPage() {
                 style={{
                   padding: '1.75rem',
                   border: '2px solid #ef4444',
-                  borderRadius: styleObj.id === 'brutalism' ? '0px' : '12px',
+                  borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '12px',
                   backgroundColor: 'rgba(239, 68, 68, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -560,7 +562,7 @@ export default function PlaygroundPage() {
                 <button
                   type="button"
                   onClick={() => setFeedbackState('default')}
-                  className="neo-btn-primary"
+                  className={themeClasses.btnPrimary}
                   style={{ padding: '8px 20px', fontSize: '0.85rem' }}
                 >
                   Return to Default View
@@ -618,11 +620,11 @@ export default function PlaygroundPage() {
 
                 {/* Token Cards Grid */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
-                  <div style={{ padding: '1rem', borderRadius: '8px', backgroundColor: 'rgba(125, 125, 125, 0.08)', border: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                  <div className={themeClasses.card} style={{ padding: '1rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Motion Profile</span>
                     <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.motionPersonality.split(';')[0]}</p>
                   </div>
-                  <div style={{ padding: '1rem', borderRadius: '8px', backgroundColor: 'rgba(125, 125, 125, 0.08)', border: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                  <div className={themeClasses.card} style={{ padding: '1rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Material Quality Gate</span>
                     <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.materialFidelityGate.split('.')[0]}</p>
                   </div>
@@ -765,7 +767,7 @@ export default function PlaygroundPage() {
                 </div>
                 <Link
                   to={`/${styleObj.id}/login`}
-                  className="neo-btn-secondary"
+                  className={themeClasses.btnSecondary}
                   style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <ExternalLink size={14} />
@@ -781,7 +783,10 @@ export default function PlaygroundPage() {
                   ...getStageStyle(styleObj.id),
                 }}
               >
-                <div style={{ maxWidth: '440px', width: '100%', padding: '1.5rem', borderRadius: '12px', backgroundColor: 'var(--site-card, #ffffff)', border: 'var(--site-border, 1px solid rgba(0,0,0,0.1))', boxShadow: 'var(--site-shadow-sm, 0 4px 12px rgba(0,0,0,0.08))' }}>
+                <div
+                  className={themeClasses.card}
+                  style={{ maxWidth: '440px', width: '100%', padding: '1.75rem', boxSizing: 'border-box' }}
+                >
                   <div style={{ marginBottom: '1.25rem', textAlign: 'center' }}>
                     <h4 style={{ fontSize: '1.2rem', fontWeight: '800' }}>Sign In to Studio</h4>
                     <p style={{ fontSize: '0.85rem', opacity: 0.8, marginTop: '2px' }}>Front-end demo validation. No remote credentials stored.</p>
@@ -793,7 +798,8 @@ export default function PlaygroundPage() {
                         type="email"
                         readOnly
                         value="designer@example.com"
-                        style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid rgba(125,125,125,0.3)', backgroundColor: 'transparent', fontSize: '0.9rem' }}
+                        className={themeClasses.input}
+                        style={{ width: '100%', fontSize: '0.9rem' }}
                       />
                     </div>
                     <div>
@@ -802,12 +808,13 @@ export default function PlaygroundPage() {
                         type="password"
                         readOnly
                         value="samplepassword"
-                        style={{ width: '100%', padding: '8px 12px', borderRadius: '6px', border: '1px solid rgba(125,125,125,0.3)', backgroundColor: 'transparent', fontSize: '0.9rem' }}
+                        className={themeClasses.input}
+                        style={{ width: '100%', fontSize: '0.9rem' }}
                       />
                     </div>
                     <Link
                       to={`/${styleObj.id}/login`}
-                      className="neo-btn-primary"
+                      className={themeClasses.btnPrimary}
                       style={{ marginTop: '0.5rem', padding: '10px', textAlign: 'center', fontSize: '0.875rem' }}
                     >
                       Test Full Auth Flow
@@ -922,7 +929,7 @@ export default function PlaygroundPage() {
                 }}
               >
                 {/* State 1: Skeleton */}
-                <div style={{ padding: '1.25rem', borderRadius: '8px', border: '1px solid rgba(125,125,125,0.2)', backgroundColor: 'rgba(125,125,125,0.06)' }}>
+                <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
                   <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>1. Loading Skeleton</span>
                   <div style={{ marginTop: '0.75rem' }}>
                     <div style={{ height: '16px', width: '70%', backgroundColor: 'rgba(125,125,125,0.2)', borderRadius: '4px', marginBottom: '8px' }} />
@@ -932,7 +939,7 @@ export default function PlaygroundPage() {
                 </div>
 
                 {/* State 2: Warning Banner */}
-                <div style={{ padding: '1.25rem', borderRadius: '8px', border: '1px solid rgba(239, 68, 68, 0.3)', backgroundColor: 'rgba(239, 68, 68, 0.08)' }}>
+                <div style={{ padding: '1.25rem', borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '8px', border: '1px solid rgba(239, 68, 68, 0.3)', backgroundColor: 'rgba(239, 68, 68, 0.08)' }}>
                   <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', color: '#ef4444' }}>2. Error Banner</span>
                   <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem', color: '#ef4444' }}>
                     Authentication simulation prevented: Missing required parameter.
@@ -940,7 +947,7 @@ export default function PlaygroundPage() {
                 </div>
 
                 {/* State 3: Empty State */}
-                <div style={{ padding: '1.25rem', borderRadius: '8px', border: '1px solid rgba(125,125,125,0.2)', backgroundColor: 'rgba(125,125,125,0.06)', textAlign: 'center' }}>
+                <div className={themeClasses.card} style={{ padding: '1.25rem', textAlign: 'center' }}>
                   <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>3. Empty State</span>
                   <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem' }}>
                     Zero matching records found.
@@ -963,7 +970,7 @@ export default function PlaygroundPage() {
                 </div>
                 <Link
                   to={`/${styleObj.id}/dashboard`}
-                  className="neo-btn-secondary"
+                  className={themeClasses.btnSecondary}
                   style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                 >
                   <ExternalLink size={14} />
@@ -980,17 +987,17 @@ export default function PlaygroundPage() {
                 }}
               >
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-                  <div style={{ padding: '1.25rem', borderRadius: '10px', backgroundColor: 'rgba(125, 125, 125, 0.08)', border: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Specimen Coverage</span>
                     <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>100%</div>
                     <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>11 / 11 Categories Tested</span>
                   </div>
-                  <div style={{ padding: '1.25rem', borderRadius: '10px', backgroundColor: 'rgba(125, 125, 125, 0.08)', border: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Anti-Slop Quality Gate</span>
                     <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>Pass</div>
                     <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>3-Tier Audit Verified</span>
                   </div>
-                  <div style={{ padding: '1.25rem', borderRadius: '10px', backgroundColor: 'rgba(125, 125, 125, 0.08)', border: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Style Identity</span>
                     <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>{styleObj.label}</div>
                     <span style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: '700' }}>Active Token Profile</span>
@@ -1000,7 +1007,7 @@ export default function PlaygroundPage() {
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Link
                     to={`/${styleObj.id}/dashboard`}
-                    className="neo-btn-primary"
+                    className={themeClasses.btnPrimary}
                     style={{ padding: '10px 20px', fontSize: '0.85rem' }}
                   >
                     Explore Interactive Dashboard

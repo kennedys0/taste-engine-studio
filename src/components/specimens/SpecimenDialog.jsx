@@ -69,6 +69,109 @@ export default function SpecimenDialog({ styleId = 'neo-brutalism' }) {
     }
   };
 
+  const getSecondaryBtnClass = () => {
+    switch (styleId) {
+      case 'glassmorphism': return 'glass-btn-secondary';
+      case 'claymorphism': return 'clay-btn-secondary';
+      case 'brutalism': return 'brutal-btn-secondary';
+      case 'minimalism': return 'mini-btn-secondary';
+      case 'swiss-editorial': return 'swiss-btn-secondary';
+      case 'bento': return 'bento-btn-secondary';
+      case 'skeuomorphism': return 'skeuo-btn-secondary';
+      case 'retro-terminal': return 'term-btn-secondary';
+      case 'enterprise': return 'ent-btn-secondary';
+      default: return 'neo-btn-secondary';
+    }
+  };
+
+  const getDialogStyle = () => {
+    switch (styleId) {
+      case 'glassmorphism':
+        return {
+          backgroundColor: 'var(--glass-surface, rgba(255, 255, 255, 0.65))',
+          color: 'var(--glass-ink, #0f172a)',
+          border: '1px solid var(--glass-edge, rgba(255, 255, 255, 0.7))',
+          borderRadius: '20px',
+          boxShadow: 'var(--glass-shadow, 0 20px 50px rgba(28, 76, 156, 0.2))',
+          backdropFilter: 'blur(20px) saturate(140%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(140%)',
+        };
+      case 'claymorphism':
+        return {
+          backgroundColor: 'var(--clay-light, #ffffff)',
+          color: 'var(--clay-text-dark, #2d3748)',
+          border: 'none',
+          borderRadius: '28px',
+          boxShadow: 'var(--clay-inner-light), 0 20px 40px rgba(0,0,0,0.18)',
+        };
+      case 'brutalism':
+        return {
+          backgroundColor: 'var(--brutal-bg, #ffffff)',
+          color: 'var(--brutal-ink, #000000)',
+          border: 'var(--brutal-border, 3px solid #000000)',
+          borderRadius: '0px',
+          boxShadow: 'none',
+        };
+      case 'minimalism':
+        return {
+          backgroundColor: 'var(--mini-surface, #ffffff)',
+          color: 'var(--mini-ink, #111827)',
+          border: 'var(--mini-border, 1px solid rgba(0, 0, 0, 0.08))',
+          borderRadius: '12px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+        };
+      case 'swiss-editorial':
+        return {
+          backgroundColor: 'var(--swiss-surface, #ffffff)',
+          color: 'var(--swiss-ink, #000000)',
+          border: '2px solid currentColor',
+          borderRadius: '0px',
+          boxShadow: 'none',
+        };
+      case 'bento':
+        return {
+          backgroundColor: 'var(--bento-surface, #ffffff)',
+          color: 'var(--bento-ink, #1f2937)',
+          border: 'var(--bento-border, 1px solid rgba(0, 0, 0, 0.08))',
+          borderRadius: '20px',
+          boxShadow: 'var(--bento-shadow, 0 20px 50px rgba(0,0,0,0.12))',
+        };
+      case 'skeuomorphism':
+        return {
+          background: 'var(--skeuo-chassis, linear-gradient(180deg, #edf0f5 0%, #d8dde6 100%))',
+          color: 'var(--skeuo-ink, #1a202c)',
+          border: 'var(--skeuo-panel-border, 1px solid #b8bec9)',
+          borderRadius: '16px',
+          boxShadow: 'var(--skeuo-highlight), 0 24px 50px rgba(0, 0, 0, 0.4)',
+        };
+      case 'retro-terminal':
+        return {
+          backgroundColor: 'var(--term-surface, #0c1017)',
+          color: 'var(--term-ink, #523102)',
+          border: 'var(--term-border, 1px solid rgba(124, 74, 3, 0.35))',
+          borderRadius: '4px',
+          boxShadow: 'inset 0 0 30px rgba(0, 0, 0, 0.6), 0 20px 40px rgba(0, 0, 0, 0.6)',
+        };
+      case 'enterprise':
+        return {
+          backgroundColor: 'var(--ent-surface, #ffffff)',
+          color: 'var(--ent-ink, #111827)',
+          border: 'var(--ent-border, 1px solid #e5e7eb)',
+          borderRadius: '8px',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
+        };
+      case 'neo-brutalism':
+      default:
+        return {
+          backgroundColor: 'var(--neo-card, #ffffff)',
+          color: 'var(--neo-ink, #121212)',
+          border: 'var(--neo-border, 2.5px solid #121212)',
+          borderRadius: 'var(--neo-radius, 8px)',
+          boxShadow: '8px 8px 0 var(--neo-ink, #121212)',
+        };
+    }
+  };
+
   return (
     <div>
       <button
@@ -114,14 +217,9 @@ export default function SpecimenDialog({ styleId = 'neo-brutalism' }) {
             style={{
               width: '100%',
               maxWidth: '480px',
-              backgroundColor: styleId === 'glassmorphism' ? 'var(--glass-surface)' : styleId === 'claymorphism' ? 'var(--clay-light)' : styleId === 'bento' ? 'var(--bento-surface)' : styleId === 'brutalism' ? 'var(--brutal-surface)' : styleId === 'retro-terminal' ? 'var(--term-surface)' : styleId === 'skeuomorphism' ? 'var(--skeuo-bg)' : 'var(--site-card)',
-              color: styleId === 'glassmorphism' ? 'var(--glass-ink)' : styleId === 'claymorphism' ? 'var(--clay-text-dark)' : styleId === 'bento' ? 'var(--bento-ink)' : styleId === 'brutalism' ? 'var(--brutal-ink)' : styleId === 'retro-terminal' ? 'var(--term-ink)' : styleId === 'skeuomorphism' ? 'var(--skeuo-ink)' : 'inherit',
-              border: styleId === 'glassmorphism' ? '1px solid var(--glass-edge)' : styleId === 'brutalism' ? 'var(--brutal-border)' : 'var(--site-border)',
-              borderRadius: styleId === 'brutalism' || styleId === 'swiss-editorial' ? '0px' : styleId === 'claymorphism' ? '28px' : '12px',
-              boxShadow: styleId === 'neo-brutalism' ? '8px 8px 0 var(--neo-ink)' : styleId === 'claymorphism' ? 'var(--clay-inner-light), 0 20px 40px rgba(0,0,0,0.3)' : '0 20px 50px rgba(0,0,0,0.35)',
               padding: '2rem',
               position: 'relative',
-              backdropFilter: styleId === 'glassmorphism' ? 'blur(20px) saturate(140%)' : 'none',
+              ...getDialogStyle(),
             }}
           >
             {/* Header */}
@@ -179,15 +277,8 @@ export default function SpecimenDialog({ styleId = 'neo-brutalism' }) {
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                style={{
-                  padding: '10px 18px',
-                  fontWeight: '600',
-                  fontSize: '0.9rem',
-                  border: '1px solid currentColor',
-                  borderRadius: styleId === 'brutalism' ? '0px' : '6px',
-                  cursor: 'pointer',
-                  backgroundColor: 'transparent',
-                }}
+                className={getSecondaryBtnClass()}
+                style={{ padding: '10px 18px', fontSize: '0.9rem' }}
               >
                 Cancel
               </button>
