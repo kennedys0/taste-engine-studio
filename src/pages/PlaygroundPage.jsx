@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { SPECIMEN_CATEGORIES } from '../data/specimenCatalog';
+import { SAMPLE_PROJECTS } from '../data/sampleProjects';
 import { STYLES, getStyle } from '../styles/registry';
 import { getStyleThemeClasses } from '../utils/styleTheme';
 import SpecimenButtons from '../components/specimens/SpecimenButtons';
@@ -1070,24 +1071,75 @@ export default function PlaygroundPage() {
                         <span>Open Dashboard</span>
                       </Link>
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+
+                    {/* Live Mini KPI Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
                       <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Specimen Coverage</span>
-                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>100%</div>
-                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>11 / 11 Tested</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Sample Work Items</span>
+                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', fontVariantNumeric: 'tabular-nums' }}>
+                          {SAMPLE_PROJECTS.length}
+                        </div>
+                        <span style={{ fontSize: '0.75rem', opacity: 0.75, fontWeight: '700' }}>Active in Fixture</span>
                       </div>
                       <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Anti-Slop Quality Gate</span>
-                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>Pass</div>
-                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>3-Tier Verified</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Completed Gates</span>
+                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', color: '#10b981', fontVariantNumeric: 'tabular-nums' }}>
+                          {SAMPLE_PROJECTS.filter((p) => p.status === 'Completed').length}
+                        </div>
+                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>40% Complete</span>
                       </div>
                       <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Style Identity</span>
-                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>{styleObj.label}</div>
-                        <span style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: '700' }}>Active Tokens</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Under Visual QA</span>
+                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', color: '#f59e0b', fontVariantNumeric: 'tabular-nums' }}>
+                          {SAMPLE_PROJECTS.filter((p) => p.status === 'In Review').length}
+                        </div>
+                        <span style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: '700' }}>Pending Approval</span>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+
+                    {/* Live Mini Activity Feed of Recent Tasks */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>
+                        Recent Sample Activity:
+                      </span>
+                      {SAMPLE_PROJECTS.slice(0, 3).map((item) => (
+                        <div
+                          key={item.id}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '8px 12px',
+                            borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '12px' : '6px',
+                            backgroundColor: 'rgba(125, 125, 125, 0.08)',
+                            fontSize: '0.8rem',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontFamily: 'monospace', fontWeight: '700' }}>{item.id}</span>
+                            <span style={{ fontWeight: '600' }}>{item.name}</span>
+                          </div>
+                          <span
+                            style={{
+                              fontSize: '0.725rem',
+                              fontWeight: '700',
+                              padding: '2px 6px',
+                              borderRadius: styleObj.id === 'brutalism' ? '0px' : '4px',
+                              backgroundColor:
+                                item.status === 'Completed' ? 'rgba(16, 185, 129, 0.15)' :
+                                item.status === 'In Review' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(59, 130, 246, 0.15)',
+                              color:
+                                item.status === 'Completed' ? '#10b981' :
+                                item.status === 'In Review' ? '#f59e0b' : '#3b82f6',
+                            }}
+                          >
+                            {item.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '0.5rem' }}>
                       <Link
                         to={`/${styleObj.id}/dashboard`}
                         className={themeClasses.btnPrimary}
