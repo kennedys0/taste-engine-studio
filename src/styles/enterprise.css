@@ -40,6 +40,15 @@
 }
 
 /* Enterprise Data Table */
+.ent-card {
+  background-color: var(--ent-surface);
+  color: var(--ent-ink);
+  border: var(--ent-border);
+  border-radius: var(--ent-radius);
+  box-shadow: var(--ent-shadow);
+  padding: 1.5rem;
+}
+
 .ent-table-container {
   background-color: var(--ent-surface);
   color: var(--ent-ink);
