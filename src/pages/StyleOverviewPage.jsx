@@ -54,8 +54,8 @@ export default function StyleOverviewPage() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
-                fontWeight: '800',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                fontWeight: '700',
                 letterSpacing: '-0.02em',
                 marginBottom: '1rem',
                 color: 'var(--glass-ink)',
@@ -66,11 +66,12 @@ export default function StyleOverviewPage() {
             </h1>
             <p
               style={{
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.6',
                 color: 'var(--glass-muted)',
                 maxWidth: '680px',
                 margin: '0 auto 2rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Notice the ambient radial gradients filtering through this translucent pane with 18px blur and 1px specular top reflection.
@@ -98,8 +99,8 @@ export default function StyleOverviewPage() {
             <span
               style={{
                 display: 'inline-block',
-                fontSize: '0.85rem',
-                fontWeight: '800',
+                fontSize: '0.8rem',
+                fontWeight: '700',
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 color: 'var(--clay-primary)',
@@ -110,8 +111,8 @@ export default function StyleOverviewPage() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
-                fontWeight: '800',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                fontWeight: '700',
                 marginBottom: '1rem',
                 lineHeight: '1.15',
                 color: 'var(--clay-text-dark)',
@@ -121,11 +122,12 @@ export default function StyleOverviewPage() {
             </h1>
             <p
               style={{
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.6',
                 color: 'var(--clay-muted)',
                 maxWidth: '680px',
                 margin: '0 auto 2.5rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Notice the dual opposing inner highlights (top-left) and form shadows (bottom-right) providing authentic tactile depth.
@@ -157,21 +159,22 @@ export default function StyleOverviewPage() {
             <h1
               style={{
                 fontFamily: 'var(--brutal-font-heading)',
-                fontSize: 'clamp(2.6rem, 6vw, 4.5rem)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
                 textTransform: 'uppercase',
                 letterSpacing: '-0.02em',
-                lineHeight: '1.05',
-                marginBottom: '1.5rem',
+                lineHeight: '1.15',
+                marginBottom: '1rem',
               }}
             >
               TASTE ENGINE // {styleObj.label}
             </h1>
             <p
               style={{
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.6',
-                marginBottom: '2.5rem',
+                marginBottom: '2rem',
                 maxWidth: '720px',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Exposed black border grid, 0px square corners, zero blur, and immediate 0ms color inversion.
@@ -237,22 +240,23 @@ export default function StyleOverviewPage() {
             <span className="swiss-index">01 / TYPOGRAPHIC SPECIFICATION</span>
             <h1
               style={{
-                fontSize: 'clamp(2.8rem, 7vw, 5.2rem)',
-                fontWeight: '800',
-                letterSpacing: '-0.04em',
-                lineHeight: '1.02',
-                marginBottom: '1.5rem',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                fontWeight: '700',
+                letterSpacing: '-0.03em',
+                lineHeight: '1.15',
+                marginBottom: '1rem',
               }}
             >
               Taste Engine, interpreted through {styleObj.label}
             </h1>
             <p
               style={{
-                fontSize: '1.25rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.6',
                 color: 'var(--swiss-muted)',
                 maxWidth: '680px',
-                marginBottom: '2.5rem',
+                marginBottom: '2rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Dramatic scale contrast, 1px horizontal hairline rules, and asymmetric 12-column grid structure.
@@ -282,13 +286,13 @@ export default function StyleOverviewPage() {
           >
             {/* Dominant Hero Tile (2 cols if wide) */}
             <div className="bento-tile" style={{ gridColumn: 'span 2' }}>
-              <span style={{ fontSize: '0.8rem', fontWeight: '800', color: 'var(--bento-accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--bento-accent)', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
                 ASYMMETRIC HERO TILE
               </span>
-              <h1 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', fontWeight: '800', lineHeight: '1.15', marginBottom: '1rem' }}>
+              <h1 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', fontWeight: '700', lineHeight: '1.15', marginBottom: '1rem' }}>
                 Taste Engine: Bento Grid Architecture
               </h1>
-              <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--bento-muted)', marginBottom: '2rem' }}>
+              <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--bento-muted)', marginBottom: '2rem', minHeight: '52px' }}>
                 {styleObj.tagline} Notice how the 2x2 dominant hero tile anchors the composition while supporting tiles present distinct internal layouts.
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
@@ -335,7 +339,7 @@ export default function StyleOverviewPage() {
             </div>
             <h1
               style={{
-                fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
                 fontWeight: '700',
                 letterSpacing: '-0.01em',
                 marginBottom: '1rem',
@@ -347,11 +351,12 @@ export default function StyleOverviewPage() {
             </h1>
             <p
               style={{
-                fontSize: '1.15rem',
+                fontSize: '1.1rem',
                 lineHeight: '1.6',
                 color: 'var(--skeuo-muted)',
                 maxWidth: '680px',
                 margin: '0 auto 2.5rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Multi-stop metallic gradients, top specular highlights, and physical 1.5px mechanical button depression.
@@ -396,6 +401,7 @@ export default function StyleOverviewPage() {
                 color: 'var(--ent-muted)',
                 maxWidth: '720px',
                 marginBottom: '2rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Compact 36px table rows, tabular figures (tabular-nums), and WCAG AA calibrated semantic status pills.
@@ -430,7 +436,7 @@ export default function StyleOverviewPage() {
             </span>
             <h1
               style={{
-                fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
                 fontWeight: '700',
                 letterSpacing: '-0.02em',
                 marginBottom: '1rem',
@@ -442,11 +448,12 @@ export default function StyleOverviewPage() {
             </h1>
             <p
               style={{
-                fontSize: '1.15rem',
-                lineHeight: '1.65',
+                fontSize: '1.1rem',
+                lineHeight: '1.6',
                 color: 'var(--mini-muted)',
                 maxWidth: '680px',
-                marginBottom: '2.5rem',
+                marginBottom: '2rem',
+                minHeight: '52px',
               }}
             >
               {styleObj.tagline} Active negative space, mathematical type hierarchy, hairline dividers, and quiet affordances.
@@ -473,21 +480,22 @@ export default function StyleOverviewPage() {
           </div>
           <h1
             style={{
-              fontSize: 'clamp(2.4rem, 5vw, 3.8rem)',
-              fontWeight: '800',
-              lineHeight: '1.12',
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+              fontWeight: '700',
+              lineHeight: '1.15',
               letterSpacing: '-0.02em',
-              marginBottom: '1.25rem',
+              marginBottom: '1rem',
             }}
           >
             Taste Engine, interpreted through {styleObj.label}
           </h1>
           <p
             style={{
-              fontSize: '1.15rem',
+              fontSize: '1.1rem',
               lineHeight: '1.6',
               maxWidth: '680px',
               margin: '0 auto 2.5rem',
+              minHeight: '52px',
               opacity: 0.9,
             }}
           >
@@ -528,32 +536,32 @@ export default function StyleOverviewPage() {
       <section style={{ padding: '4rem 1.5rem', borderTop: '2px solid rgba(125, 125, 125, 0.2)' }}>
         <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ marginBottom: '2.5rem' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
               Design DNA & Tokens
             </span>
-            <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.4rem' }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.4rem' }}>
               Style Anatomy & Material Rules
             </h2>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <div className="neo-card" style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>Typography</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Typography</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.typography}</p>
             </div>
 
             <div className="neo-card" style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>Material Fidelity Gate</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Material Fidelity Gate</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.materialFidelityGate}</p>
             </div>
 
             <div className="neo-card" style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>Motion Personality</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Motion Personality</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.motionPersonality}</p>
             </div>
 
             <div className="neo-card" style={{ padding: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '0.5rem' }}>Anti-Slop Exception</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.5rem' }}>Anti-Slop Exception</h3>
               <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>{styleObj.antiSlopException}</p>
             </div>
           </div>
@@ -565,10 +573,10 @@ export default function StyleOverviewPage() {
         <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
                 Live Laboratory
               </span>
-              <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.4rem' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: '700', marginTop: '0.4rem' }}>
                 Curated Interactive Specimens
               </h2>
             </div>
@@ -580,15 +588,15 @@ export default function StyleOverviewPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'start' }}>
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '1rem' }}>Image Card Specimen</h3>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '1rem' }}>Image Card Specimen</h3>
               <SpecimenImageCard styleId={styleObj.id} />
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '1rem' }}>Interactive Buttons & Toast</h3>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginBottom: '1rem' }}>Interactive Buttons & Toast</h3>
               <SpecimenButtons styleId={styleObj.id} />
 
-              <h3 style={{ fontSize: '1.15rem', fontWeight: '800', marginTop: '2rem', marginBottom: '1rem' }}>Accessible Tab Strip</h3>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: '700', marginTop: '2rem', marginBottom: '1rem' }}>Accessible Tab Strip</h3>
               <SpecimenTabs styleId={styleObj.id} />
             </div>
           </div>

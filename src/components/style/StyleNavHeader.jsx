@@ -18,40 +18,45 @@ export default function StyleNavHeader({ styleObj }) {
 
   return (
     <div
+      className="style-nav-header"
       style={{
+        fontFamily: 'var(--site-font-body)',
         borderBottom: 'var(--site-border)',
         backgroundColor: 'var(--site-card)',
         color: 'var(--site-ink)',
-        padding: '0.75rem 0',
+        padding: '0.625rem 0',
         position: 'sticky',
         top: 'var(--header-height)',
         zIndex: 90,
       }}
     >
-      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
         {/* Top row: Back to styles, style selector, prev/next, theme toggle */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', minHeight: '38px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
             <Link
               to="/styles"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '4px',
+                gap: '5px',
                 fontSize: '0.85rem',
                 fontWeight: '700',
-                padding: '4px 10px',
+                padding: '5px 11px',
                 borderRadius: 'var(--site-radius)',
                 border: 'var(--site-border)',
                 backgroundColor: 'var(--site-bg)',
+                color: 'var(--site-ink)',
                 textDecoration: 'none',
+                fontFamily: 'var(--site-font-body)',
+                whiteSpace: 'nowrap',
               }}
             >
-              <ArrowLeft size={16} />
+              <ArrowLeft size={15} />
               <span>All 10 Styles</span>
             </Link>
 
-            {/* Current Style Dropdown */}
+            {/* Current Style Dropdown with fixed width to eliminate layout shifts */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <label htmlFor="style-select" className="sr-only">Switch visual style</label>
               <select
@@ -64,9 +69,11 @@ export default function StyleNavHeader({ styleObj }) {
                   border: 'var(--site-border)',
                   backgroundColor: 'var(--site-accent)',
                   color: '#121212',
-                  fontWeight: '800',
-                  fontSize: '0.95rem',
+                  fontWeight: '700',
+                  fontSize: '0.9rem',
                   cursor: 'pointer',
+                  fontFamily: 'var(--site-font-body)',
+                  minWidth: '170px',
                 }}
               >
                 {STYLES.map((s) => (
@@ -118,11 +125,10 @@ export default function StyleNavHeader({ styleObj }) {
             >
               <ChevronRight size={18} />
             </Link>
-
           </div>
         </div>
 
-        {/* Bottom row: Subroute tabs */}
+        {/* Bottom row: Subroute tabs with constant 700 font-weight to prevent jumping */}
         <nav
           style={{
             display: 'flex',
@@ -130,6 +136,7 @@ export default function StyleNavHeader({ styleObj }) {
             gap: '0.5rem',
             overflowX: 'auto',
             paddingBottom: '2px',
+            fontFamily: 'var(--site-font-body)',
           }}
           aria-label={`${styleObj.label} sub-routes`}
         >
@@ -147,13 +154,15 @@ export default function StyleNavHeader({ styleObj }) {
                   padding: '6px 14px',
                   borderRadius: 'var(--site-radius)',
                   fontSize: '0.875rem',
-                  fontWeight: isActive ? '800' : '600',
+                  fontWeight: '700',
                   color: isActive ? '#121212' : 'var(--site-ink)',
                   backgroundColor: isActive ? 'var(--site-accent)' : 'transparent',
                   border: isActive ? 'var(--site-border)' : '1px solid transparent',
                   boxShadow: isActive ? '2px 2px 0 var(--site-ink)' : 'none',
                   textDecoration: 'none',
                   whiteSpace: 'nowrap',
+                  fontFamily: 'var(--site-font-body)',
+                  transition: 'background-color 100ms ease-out, border-color 100ms ease-out',
                 })}
               >
                 <Icon size={16} />

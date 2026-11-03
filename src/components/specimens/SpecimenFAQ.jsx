@@ -127,7 +127,7 @@ export default function SpecimenFAQ({ styleId = 'neo-brutalism', items = FAQ_ITE
                 justifyContent: 'space-between',
                 textAlign: 'left',
                 gap: '1rem',
-                fontWeight: styleId === 'brutalism' || styleId === 'neo-brutalism' ? '800' : '600',
+                fontWeight: '700',
                 fontSize: '1rem',
                 color: 'inherit',
               }}

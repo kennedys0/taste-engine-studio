@@ -53,10 +53,10 @@ export default function SpecimenHeroDemo() {
                 border: isActive ? '1.5px solid var(--site-ink)' : '1.5px solid transparent',
                 backgroundColor: isActive ? 'var(--site-accent)' : 'transparent',
                 color: isActive ? '#121212' : 'var(--site-ink)',
-                fontWeight: isActive ? '800' : '600',
+                fontWeight: '700',
                 fontSize: '0.8rem',
                 cursor: 'pointer',
-                transition: 'all 120ms ease-out',
+                transition: 'background-color 100ms ease-out, border-color 100ms ease-out',
               }}
             >
               {item.label}

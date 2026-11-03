@@ -171,21 +171,23 @@ export default function PlaygroundPage() {
       {/* =========================================================================
           1. Playground Header & Live Style Switcher
           ========================================================================= */}
-      <div style={{ marginBottom: '2rem' }}>
+      <div style={{ marginBottom: '2rem', fontFamily: 'var(--site-font-body)' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.25rem' }}>
           <div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 10px', borderRadius: '4px', backgroundColor: 'rgba(139, 92, 246, 0.12)', border: '1px solid rgba(139, 92, 246, 0.3)', marginBottom: '0.5rem' }}>
               <Sparkles size={14} color="#8b5cf6" />
-              <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
+              <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
                 Component Laboratory & Specimen Workbench
               </span>
             </div>
-            <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: '800', letterSpacing: '-0.02em', lineHeight: 1.15 }}>
+            <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: '700', letterSpacing: '-0.02em', lineHeight: 1.15, fontFamily: 'var(--site-font-body)' }}>
               {styleObj.label} Playground
             </h1>
-            <p style={{ fontSize: '0.95rem', opacity: 0.85, marginTop: '0.5rem', maxWidth: '680px', lineHeight: 1.5 }}>
-              {styleObj.tagline}
-            </p>
+            <div style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}>
+              <p style={{ fontSize: '0.95rem', opacity: 0.85, margin: 0, maxWidth: '720px', lineHeight: 1.5, fontFamily: 'var(--site-font-body)' }}>
+                {styleObj.tagline}
+              </p>
+            </div>
           </div>
 
           {/* Quick Subroute Action Pills */}
@@ -193,7 +195,7 @@ export default function PlaygroundPage() {
             <Link
               to={`/${styleObj.id}/login`}
               className="neo-btn-secondary"
-              style={{ padding: '8px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="Inspect dedicated full-screen authentication experience"
             >
               <Lock size={14} />
@@ -202,7 +204,7 @@ export default function PlaygroundPage() {
             <Link
               to={`/${styleObj.id}/dashboard`}
               className="neo-btn-secondary"
-              style={{ padding: '8px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="Inspect dense operational dashboard experience"
             >
               <Grid size={14} />
@@ -211,7 +213,7 @@ export default function PlaygroundPage() {
             <Link
               to={`/${styleObj.id}`}
               className="neo-btn-primary"
-              style={{ padding: '8px 16px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '8px 16px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title="View full style overview and architectural specification"
             >
               <span>Style Overview</span>
@@ -220,10 +222,10 @@ export default function PlaygroundPage() {
           </div>
         </div>
 
-        {/* Live 10-Style Fast Switcher Track */}
+        {/* Live 10-Style Fast Switcher Track: Constant 700 weight ensures zero horizontal button shifts */}
         <div
           style={{
-            marginTop: '1.5rem',
+            marginTop: '1.25rem',
             padding: '8px 12px',
             backgroundColor: 'var(--site-card)',
             border: 'var(--site-border)',
@@ -233,9 +235,10 @@ export default function PlaygroundPage() {
             alignItems: 'center',
             gap: '8px',
             overflowX: 'auto',
+            fontFamily: 'var(--site-font-body)',
           }}
         >
-          <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', opacity: 0.75, marginRight: '4px' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', opacity: 0.75, marginRight: '4px' }}>
             Switch Style:
           </span>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'nowrap' }}>
@@ -247,16 +250,17 @@ export default function PlaygroundPage() {
                   type="button"
                   onClick={() => handleStyleChange(s.id)}
                   style={{
-                    padding: '5px 11px',
+                    padding: '5px 12px',
                     borderRadius: '4px',
                     border: isCurrent ? '1.5px solid var(--site-ink)' : '1px solid transparent',
                     backgroundColor: isCurrent ? 'var(--site-accent)' : 'transparent',
                     color: isCurrent ? '#121212' : 'var(--site-ink)',
-                    fontWeight: isCurrent ? '800' : '600',
+                    fontWeight: '700',
                     fontSize: '0.8rem',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
-                    transition: 'all 120ms ease-out',
+                    fontFamily: 'var(--site-font-body)',
+                    transition: 'background-color 100ms ease-out, border-color 100ms ease-out',
                   }}
                 >
                   {s.label}
@@ -283,18 +287,19 @@ export default function PlaygroundPage() {
           borderRadius: 'var(--site-radius)',
           boxShadow: 'var(--site-shadow-sm)',
           marginBottom: '1.75rem',
+          fontFamily: 'var(--site-font-body)',
         }}
       >
-        {/* Viewport Simulation Controls */}
+        {/* Viewport Simulation Controls with constant font-weight 700 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.825rem', fontWeight: '800', marginRight: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: '0.825rem', fontWeight: '700', marginRight: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Viewport:
           </span>
           <button
             type="button"
             onClick={() => setViewportPreset('100%')}
             className={viewportPreset === '100%' ? 'neo-btn-primary' : 'neo-btn-secondary'}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Full Width Responsive Fluid Canvas"
           >
             <Monitor size={14} />
@@ -304,7 +309,7 @@ export default function PlaygroundPage() {
             type="button"
             onClick={() => setViewportPreset('768px')}
             className={viewportPreset === '768px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Tablet Width Simulator (768px)"
           >
             <Tablet size={14} />
@@ -314,7 +319,7 @@ export default function PlaygroundPage() {
             type="button"
             onClick={() => setViewportPreset('390px')}
             className={viewportPreset === '390px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Mobile Width Simulator (390px)"
           >
             <Smartphone size={14} />
@@ -324,7 +329,7 @@ export default function PlaygroundPage() {
             type="button"
             onClick={() => setViewportPreset('320px')}
             className={viewportPreset === '320px' ? 'neo-btn-primary' : 'neo-btn-secondary'}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Narrow Mobile Simulator (320px)"
           >
             <Smartphone size={14} />
@@ -335,7 +340,7 @@ export default function PlaygroundPage() {
         {/* State Simulation & Reset */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <label htmlFor="state-switcher" style={{ fontSize: '0.825rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <label htmlFor="state-switcher" style={{ fontSize: '0.825rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               State:
             </label>
             <select
@@ -351,6 +356,7 @@ export default function PlaygroundPage() {
                 fontSize: '0.825rem',
                 fontWeight: '700',
                 cursor: 'pointer',
+                fontFamily: 'var(--site-font-body)',
               }}
             >
               <option value="default">Default State</option>
@@ -364,7 +370,7 @@ export default function PlaygroundPage() {
             type="button"
             onClick={handleReset}
             className="neo-btn-secondary"
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
             title="Reset playground viewports, states, and filters"
           >
             <RotateCcw size={14} />
@@ -386,6 +392,7 @@ export default function PlaygroundPage() {
           paddingBottom: '0.75rem',
           marginBottom: '2.5rem',
           scrollbarWidth: 'thin',
+          fontFamily: 'var(--site-font-body)',
         }}
       >
         <button
@@ -394,7 +401,7 @@ export default function PlaygroundPage() {
           aria-selected={activeCategory === 'all'}
           onClick={() => setActiveCategory('all')}
           className={activeCategory === 'all' ? 'neo-btn-primary' : 'neo-btn-secondary'}
-          style={{ padding: '7px 14px', fontSize: '0.85rem', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+          style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
         >
           <Sparkles size={14} />
           <span>All Specimens</span>
@@ -411,7 +418,7 @@ export default function PlaygroundPage() {
               aria-selected={isSelected}
               onClick={() => setActiveCategory(cat.id)}
               className={isSelected ? 'neo-btn-primary' : 'neo-btn-secondary'}
-              style={{ padding: '7px 14px', fontSize: '0.85rem', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
               title={cat.desc}
             >
               <Icon size={14} />

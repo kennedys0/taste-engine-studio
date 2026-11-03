@@ -36,7 +36,7 @@ export default function SpecimenTabs({ styleId = 'neo-brutalism' }) {
             padding: '8px 16px',
             cursor: 'pointer',
             fontSize: '0.9rem',
-            fontWeight: isActive ? '800' : '600',
+            fontWeight: '700',
             transition: 'all 120ms ease-out',
             borderRadius: styleId === 'brutalism' || styleId === 'swiss-editorial' ? '0px' : '6px',
           };
