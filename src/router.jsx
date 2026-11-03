@@ -11,7 +11,6 @@ import AboutPage from './pages/AboutPage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import FeaturesPage from './pages/FeaturesPage';
 import StylesIndexPage from './pages/StylesIndexPage';
-import ShowcasePage from './pages/ShowcasePage';
 import ComparePage from './pages/ComparePage';
 import InstallationPage from './pages/InstallationPage';
 import DocsPage from './pages/DocsPage';
@@ -39,7 +38,7 @@ export const routes = [
       { path: 'how-it-works', element: <HowItWorksPage /> },
       { path: 'features', element: <FeaturesPage /> },
       { path: 'styles', element: <StylesIndexPage /> },
-      { path: 'showcase', element: <ShowcasePage /> },
+      { path: 'showcase', element: <Navigate to="/styles" replace /> },
       { path: 'compare', element: <ComparePage /> },
       { path: 'installation', element: <InstallationPage /> },
       { path: 'docs', element: <DocsPage /> },

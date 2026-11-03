@@ -144,8 +144,8 @@ export default function FeaturesPage() {
           <span>Explore 10 Styles</span>
           <ArrowRight size={18} />
         </Link>
-        <Link to="/showcase" className="neo-btn-secondary" style={{ padding: '12px 24px' }}>
-          <span>Open UI Showcase</span>
+        <Link to="/compare" className="neo-btn-secondary" style={{ padding: '12px 24px' }}>
+          <span>Compare Styles</span>
         </Link>
       </div>
     </div>

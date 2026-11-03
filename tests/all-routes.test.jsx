@@ -12,7 +12,6 @@ describe('Complete 54-Route Matrix Smoke Verification', () => {
     '/how-it-works',
     '/features',
     '/styles',
-    '/showcase',
     '/compare',
     '/installation',
     '/docs',
@@ -81,6 +80,12 @@ describe('Complete 54-Route Matrix Smoke Verification', () => {
       const memoryRouter = createMemoryRouter(routes, { initialEntries: ['/swiss'] });
       render(<RouterProvider router={memoryRouter} />);
       expect(memoryRouter.state.location.pathname).toBe('/swiss-editorial');
+    });
+
+    it('redirects /showcase to /styles', () => {
+      const memoryRouter = createMemoryRouter(routes, { initialEntries: ['/showcase'] });
+      render(<RouterProvider router={memoryRouter} />);
+      expect(memoryRouter.state.location.pathname).toBe('/styles');
     });
 
     it('redirects /editorial to /swiss-editorial', () => {

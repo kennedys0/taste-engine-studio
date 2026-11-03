@@ -1,7 +1,6 @@
 export const PRIMARY_NAV = [
   { label: 'How it works', path: '/how-it-works' },
   { label: '10 Styles', path: '/styles' },
-  { label: 'Showcase', path: '/showcase' },
   { label: 'Compare', path: '/compare' },
   { label: 'Installation', path: '/installation' },
   { label: 'Docs', path: '/docs' },
@@ -30,7 +29,6 @@ export const DOCS_SECTIONS = [
     title: 'Resources & Reference',
     items: [
       { label: 'Installation Guide', path: '/installation', desc: 'CLI commands, Claude Code, Codex, Antigravity' },
-      { label: 'Interactive Showcase', path: '/showcase', desc: 'Try real UI patterns across all styles' },
       { label: 'Side-by-Side Compare', path: '/compare', desc: 'Render the same specimen in two styles' },
       { label: 'Frequently Asked Questions', path: '/faq', desc: 'Honest answers on scope and limitations' },
     ]
@@ -40,7 +38,6 @@ export const DOCS_SECTIONS = [
 export const FOOTER_LINKS = {
   product: [
     { label: 'Explore Styles', path: '/styles' },
-    { label: 'UI Showcase', path: '/showcase' },
     { label: 'Style Comparison', path: '/compare' },
     { label: 'Installation', path: '/installation' },
   ],
