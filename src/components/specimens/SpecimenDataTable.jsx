@@ -84,7 +84,7 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
 
 
   return (
-    <div style={{ width: '100%', maxWidth: '960px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
       {/* Sample Data Disclaimer Badge */}
       <div
         style={{
@@ -225,6 +225,7 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
       <div
         className={getContainerClass()}
         style={{
+          width: '100%',
           overflowX: 'auto',
           padding: isBrutal ? '0' : isEnterprise ? '0' : '1.5rem',
         }}

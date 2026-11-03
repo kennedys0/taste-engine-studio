@@ -812,7 +812,7 @@ export default function PlaygroundPage() {
                         </button>
                       )}
                     </div>
-                    <div style={{ overflowX: 'auto' }}>
+                    <div style={{ width: '100%' }}>
                       <SpecimenDataTable styleId={styleObj.id} />
                     </div>
                   </div>
