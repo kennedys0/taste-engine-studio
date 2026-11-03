@@ -870,50 +870,38 @@ export default function DashboardDemoPage() {
              MAIN OPERATIONAL TABLE WITH SEARCH, FILTER, AND SORT TOOLBAR
              ========================================================================= */}
           <div style={{ marginBottom: '3rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1rem' }}>
-              <div>
-                <h2 style={{ fontSize: '1.35rem', fontWeight: '800', margin: 0 }}>
+            {/* Table Section Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.875rem' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
+                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0 }}>
                   {isTerm ? '[TASK_MATRIX // VERIFICATION_ITEMS]' : 'Sample Tasks & Work Items'}
                 </h2>
-                <span style={{ fontSize: '0.8rem', opacity: 0.75 }}>
+                <span style={{ fontSize: '0.785rem', opacity: 0.65, fontWeight: '600' }}>
                   Showing {filteredProjects.length} of {totalTasks} sample items
                 </span>
               </div>
-
-              {/* Reset filter button if any active filter */}
-              {(searchTerm || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedPriority !== 'All') && (
-                <button
-                  type="button"
-                  onClick={handleResetFilters}
-                  className={themeClasses.btnSecondary}
-                  style={{ padding: '6px 12px', fontSize: '0.785rem' }}
-                >
-                  Clear Filters ({filteredProjects.length} shown)
-                </button>
-              )}
             </div>
 
-            {/* Filter Toolbar */}
+            {/* Simplified & Streamlined Toolbar */}
             <div
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '0.75rem',
+                gap: '0.625rem',
                 alignItems: 'center',
-                justifyContent: 'space-between',
                 marginBottom: '1rem',
               }}
             >
               {/* Search input */}
-              <div style={{ position: 'relative', flex: '1 1 240px', minWidth: '220px' }}>
+              <div style={{ position: 'relative', flex: '1 1 240px', maxWidth: '360px' }}>
                 <Search
-                  size={16}
+                  size={15}
                   style={{
                     position: 'absolute',
                     left: '12px',
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    opacity: 0.6,
+                    opacity: 0.5,
                     pointerEvents: 'none',
                   }}
                 />
@@ -921,60 +909,100 @@ export default function DashboardDemoPage() {
                   type="search"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search sample items by ID, title, or assignee..."
+                  placeholder="Search tasks by ID, title, or assignee..."
                   aria-label="Search sample projects"
                   className={themeClasses.input}
                   style={{
                     width: '100%',
-                    paddingLeft: '36px',
-                    paddingRight: '12px',
-                    fontSize: '0.85rem',
+                    paddingLeft: '34px',
+                    paddingRight: searchTerm ? '32px' : '12px',
+                    paddingTop: '8px',
+                    paddingBottom: '8px',
+                    fontSize: '0.825rem',
                   }}
                 />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm('')}
+                    aria-label="Clear search"
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'transparent',
+                      border: 'none',
+                      color: 'inherit',
+                      opacity: 0.6,
+                      cursor: 'pointer',
+                      padding: '2px',
+                    }}
+                  >
+                    <X size={14} />
+                  </button>
+                )}
               </div>
+
+              {/* Status Dropdown */}
+              <select
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+                aria-label="Filter by status"
+                className={themeClasses.input}
+                style={{
+                  padding: '8px 12px',
+                  fontSize: '0.825rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  minWidth: '130px',
+                }}
+              >
+                <option value="All">All Statuses</option>
+                {STATUSES.filter((s) => s !== 'All').map((st) => (
+                  <option key={st} value={st}>{st}</option>
+                ))}
+              </select>
 
               {/* Category Dropdown */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  aria-label="Filter by category"
-                  className={themeClasses.input}
-                  style={{ padding: '8px 12px', fontSize: '0.825rem', fontWeight: '600', cursor: 'pointer' }}
-                >
-                  {CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>Category: {cat}</option>
-                  ))}
-                </select>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                aria-label="Filter by category"
+                className={themeClasses.input}
+                style={{
+                  padding: '8px 12px',
+                  fontSize: '0.825rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  minWidth: '140px',
+                }}
+              >
+                <option value="All">All Categories</option>
+                {CATEGORIES.filter((c) => c !== 'All').map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
 
-                {/* Status Dropdown */}
-                <select
-                  value={selectedStatus}
-                  onChange={(e) => setSelectedStatus(e.target.value)}
-                  aria-label="Filter by status"
-                  className={themeClasses.input}
-                  style={{ padding: '8px 12px', fontSize: '0.825rem', fontWeight: '600', cursor: 'pointer' }}
+              {/* Reset filter button if any filter is active */}
+              {(searchTerm || selectedCategory !== 'All' || selectedStatus !== 'All' || selectedPriority !== 'All') && (
+                <button
+                  type="button"
+                  onClick={handleResetFilters}
+                  className={themeClasses.btnSecondary}
+                  style={{
+                    padding: '7px 12px',
+                    fontSize: '0.785rem',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                  }}
+                  title="Reset all filters to default"
                 >
-                  {STATUSES.map((st) => (
-                    <option key={st} value={st}>Status: {st}</option>
-                  ))}
-                </select>
-
-                {/* Priority Dropdown */}
-                <select
-                  value={selectedPriority}
-                  onChange={(e) => setSelectedPriority(e.target.value)}
-                  aria-label="Filter by priority"
-                  className={themeClasses.input}
-                  style={{ padding: '8px 12px', fontSize: '0.825rem', fontWeight: '600', cursor: 'pointer' }}
-                >
-                  <option value="All">Priority: All</option>
-                  <option value="Critical">Priority: Critical</option>
-                  <option value="High">Priority: High</option>
-                  <option value="Medium">Priority: Medium</option>
-                  <option value="Low">Priority: Low</option>
-                </select>
-              </div>
+                  <RotateCcw size={12} />
+                  <span>Clear Filters</span>
+                </button>
+              )}
             </div>
 
             {/* Table Container */}
