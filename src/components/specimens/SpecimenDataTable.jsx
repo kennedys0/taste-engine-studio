@@ -113,14 +113,14 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
         style={{
           display: 'flex',
           flexWrap: 'wrap',
-          gap: '0.75rem',
+          gap: '0.625rem',
           alignItems: 'center',
-          justifyContent: 'space-between',
+          marginBottom: '0.5rem',
         }}
       >
         {/* Search */}
-        <div style={{ position: 'relative', flex: '1 1 240px', minWidth: '220px' }}>
-          <Search size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', opacity: 0.6 }} />
+        <div style={{ position: 'relative', flex: '1 1 220px', maxWidth: '360px' }}>
+          <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', opacity: 0.5, pointerEvents: 'none' }} />
           <input
             type="search"
             value={searchTerm}
@@ -129,61 +129,96 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
             aria-label="Search sample projects"
             style={{
               width: '100%',
-              padding: '10px 14px 10px 38px',
+              padding: '8px 12px 8px 34px',
               borderRadius: isBrutal ? '0px' : isClay ? '20px' : '6px',
               border: isBrutal ? 'var(--brutal-border)' : isGlass ? '1px solid var(--glass-edge)' : '1px solid currentColor',
               backgroundColor: isGlass ? 'var(--glass-surface)' : 'transparent',
               color: 'inherit',
-              fontSize: '0.9rem',
+              fontSize: '0.85rem',
             }}
           />
+          {searchTerm && (
+            <button
+              type="button"
+              onClick={() => setSearchTerm('')}
+              aria-label="Clear search query"
+              style={{
+                position: 'absolute',
+                right: '10px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'transparent',
+                border: 'none',
+                color: 'inherit',
+                opacity: 0.6,
+                cursor: 'pointer',
+                padding: '2px',
+              }}
+            >
+              <X size={14} />
+            </button>
+          )}
         </div>
+
+        {/* Status filter */}
+        <label htmlFor="status-filter" className="sr-only">Status</label>
+        <select
+          id="status-filter"
+          value={selectedStatus}
+          onChange={(e) => setSelectedStatus(e.target.value)}
+          style={{
+            padding: '8px 12px',
+            borderRadius: isBrutal ? '0px' : isClay ? '14px' : '6px',
+            border: isBrutal ? 'var(--brutal-border)' : isGlass ? '1px solid var(--glass-edge)' : '1px solid currentColor',
+            backgroundColor: isGlass ? 'var(--glass-surface)' : 'transparent',
+            color: 'inherit',
+            fontWeight: '600',
+            fontSize: '0.825rem',
+            cursor: 'pointer',
+            minWidth: '125px',
+          }}
+        >
+          <option value="All" style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>All Statuses</option>
+          {STATUSES.filter((s) => s !== 'All').map((s) => (
+            <option key={s} value={s} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>{s}</option>
+          ))}
+        </select>
 
         {/* Category filter */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <label htmlFor="cat-filter" className="sr-only">Category</label>
-          <select
-            id="cat-filter"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              borderRadius: isBrutal ? '0px' : '6px',
-              border: '1px solid currentColor',
-              backgroundColor: 'transparent',
-              color: 'inherit',
-              fontWeight: '600',
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-            }}
-          >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Category: {c}</option>
-            ))}
-          </select>
+        <label htmlFor="cat-filter" className="sr-only">Category</label>
+        <select
+          id="cat-filter"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          style={{
+            padding: '8px 12px',
+            borderRadius: isBrutal ? '0px' : isClay ? '14px' : '6px',
+            border: isBrutal ? 'var(--brutal-border)' : isGlass ? '1px solid var(--glass-edge)' : '1px solid currentColor',
+            backgroundColor: isGlass ? 'var(--glass-surface)' : 'transparent',
+            color: 'inherit',
+            fontWeight: '600',
+            fontSize: '0.825rem',
+            cursor: 'pointer',
+            minWidth: '135px',
+          }}
+        >
+          <option value="All" style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>All Categories</option>
+          {CATEGORIES.filter((c) => c !== 'All').map((c) => (
+            <option key={c} value={c} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>{c}</option>
+          ))}
+        </select>
 
-          {/* Status filter */}
-          <label htmlFor="status-filter" className="sr-only">Status</label>
-          <select
-            id="status-filter"
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            style={{
-              padding: '8px 12px',
-              borderRadius: isBrutal ? '0px' : '6px',
-              border: '1px solid currentColor',
-              backgroundColor: 'transparent',
-              color: 'inherit',
-              fontWeight: '600',
-              fontSize: '0.85rem',
-              cursor: 'pointer',
-            }}
+        {/* Reset filter button if any active filter */}
+        {(searchTerm || selectedCategory !== 'All' || selectedStatus !== 'All') && (
+          <button
+            type="button"
+            onClick={resetFilters}
+            className={getPrimaryBtnClass()}
+            style={{ padding: '6px 12px', fontSize: '0.785rem' }}
           >
-            {STATUSES.map((s) => (
-              <option key={s} value={s} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Status: {s}</option>
-            ))}
-          </select>
-        </div>
+            Clear Filters
+          </button>
+        )}
       </div>
 
       {/* Table Container */}

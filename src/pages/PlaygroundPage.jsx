@@ -1051,58 +1051,84 @@ export default function PlaygroundPage() {
                   <div
                     id="dashboard"
                     className={themeClasses.card}
-                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                    style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
                       <div>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                        <span style={{ fontSize: '0.725rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
                           Application Screen
                         </span>
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
-                          Dashboard Module Preview
+                        <h3 style={{ fontSize: '1.2rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Dashboard Cockpit Preview
                         </h3>
                       </div>
                       <Link
                         to={`/${styleObj.id}/dashboard`}
                         className={themeClasses.btnSecondary}
-                        style={{ padding: '5px 10px', fontSize: '0.785rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+                        style={{ padding: '5px 12px', fontSize: '0.785rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
                       >
                         <ExternalLink size={13} />
                         <span>Open Dashboard</span>
                       </Link>
                     </div>
 
-                    {/* Live Mini KPI Grid */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
-                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Sample Work Items</span>
-                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', fontVariantNumeric: 'tabular-nums' }}>
+                    {/* Streamlined Stats Row */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: '1rem',
+                        padding: '12px 16px',
+                        borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '14px' : '6px',
+                        backgroundColor: 'rgba(125, 125, 125, 0.08)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                        <span style={{ fontSize: '1.5rem', fontWeight: '800', fontVariantNumeric: 'tabular-nums' }}>
                           {SAMPLE_PROJECTS.length}
-                        </div>
-                        <span style={{ fontSize: '0.75rem', opacity: 0.75, fontWeight: '700' }}>Active in Fixture</span>
+                        </span>
+                        <span style={{ fontSize: '0.785rem', opacity: 0.7, fontWeight: '600' }}>Sample Items</span>
                       </div>
-                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Completed Gates</span>
-                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', color: '#10b981', fontVariantNumeric: 'tabular-nums' }}>
+
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                        <span style={{ fontSize: '1.5rem', fontWeight: '800', color: '#10b981', fontVariantNumeric: 'tabular-nums' }}>
                           {SAMPLE_PROJECTS.filter((p) => p.status === 'Completed').length}
-                        </div>
-                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>40% Complete</span>
+                        </span>
+                        <span style={{ fontSize: '0.785rem', opacity: 0.7, fontWeight: '600' }}>Completed (40%)</span>
                       </div>
-                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Under Visual QA</span>
-                        <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '4px', color: '#f59e0b', fontVariantNumeric: 'tabular-nums' }}>
+
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                        <span style={{ fontSize: '1.5rem', fontWeight: '800', color: '#f59e0b', fontVariantNumeric: 'tabular-nums' }}>
                           {SAMPLE_PROJECTS.filter((p) => p.status === 'In Review').length}
-                        </div>
-                        <span style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: '700' }}>Pending Approval</span>
+                        </span>
+                        <span style={{ fontSize: '0.785rem', opacity: 0.7, fontWeight: '600' }}>In Review</span>
                       </div>
                     </div>
 
-                    {/* Live Mini Activity Feed of Recent Tasks */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>
-                        Recent Sample Activity:
-                      </span>
-                      {SAMPLE_PROJECTS.slice(0, 3).map((item) => (
+                    {/* Progress Bar */}
+                    <div
+                      style={{
+                        height: '5px',
+                        width: '100%',
+                        backgroundColor: 'rgba(125, 125, 125, 0.2)',
+                        borderRadius: '3px',
+                        overflow: 'hidden',
+                      }}
+                    >
+                      <div
+                        style={{
+                          height: '100%',
+                          width: '40%',
+                          backgroundColor: '#10b981',
+                        }}
+                      />
+                    </div>
+
+                    {/* Clean Task Preview Rows */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                      {SAMPLE_PROJECTS.slice(0, 2).map((item) => (
                         <div
                           key={item.id}
                           style={{
@@ -1110,20 +1136,20 @@ export default function PlaygroundPage() {
                             justifyContent: 'space-between',
                             alignItems: 'center',
                             padding: '8px 12px',
-                            borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '12px' : '6px',
-                            backgroundColor: 'rgba(125, 125, 125, 0.08)',
+                            borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '10px' : '4px',
+                            backgroundColor: 'rgba(125, 125, 125, 0.05)',
                             fontSize: '0.8rem',
                           }}
                         >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span style={{ fontFamily: 'monospace', fontWeight: '700' }}>{item.id}</span>
-                            <span style={{ fontWeight: '600' }}>{item.name}</span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+                            <span style={{ fontFamily: 'monospace', fontWeight: '700', opacity: 0.7 }}>{item.id}</span>
+                            <span style={{ fontWeight: '600', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>{item.name}</span>
                           </div>
                           <span
                             style={{
                               fontSize: '0.725rem',
                               fontWeight: '700',
-                              padding: '2px 6px',
+                              padding: '2px 7px',
                               borderRadius: styleObj.id === 'brutalism' ? '0px' : '4px',
                               backgroundColor:
                                 item.status === 'Completed' ? 'rgba(16, 185, 129, 0.15)' :
@@ -1131,6 +1157,7 @@ export default function PlaygroundPage() {
                               color:
                                 item.status === 'Completed' ? '#10b981' :
                                 item.status === 'In Review' ? '#f59e0b' : '#3b82f6',
+                              flexShrink: 0,
                             }}
                           >
                             {item.status}
@@ -1139,13 +1166,13 @@ export default function PlaygroundPage() {
                       ))}
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', marginTop: '0.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.25rem' }}>
                       <Link
                         to={`/${styleObj.id}/dashboard`}
                         className={themeClasses.btnPrimary}
-                        style={{ padding: '8px 18px', fontSize: '0.85rem' }}
+                        style={{ padding: '7px 16px', fontSize: '0.825rem' }}
                       >
-                        Explore Interactive Dashboard
+                        Explore Full Operational Dashboard &rarr;
                       </Link>
                     </div>
                   </div>
