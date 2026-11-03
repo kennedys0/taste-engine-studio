@@ -7,9 +7,9 @@ import { ThemeProvider } from '../context/ThemeContext';
 export default function SiteLayout() {
   const { pathname } = useLocation();
 
-  // Scroll to top on navigation
+  // Scroll to top instantly on navigation
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
 
   return (
