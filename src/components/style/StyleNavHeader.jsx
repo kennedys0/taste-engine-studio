@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, LayoutGrid, ArrowLeft, Sliders, Shield, Lock, LayoutDashboard } from 'lucide-react';
 import { STYLES, STYLE_IDS } from '../../styles/registry';
-import ThemeToggle from '../shell/ThemeToggle';
 
 export default function StyleNavHeader({ styleObj }) {
   const navigate = useNavigate();
@@ -120,7 +119,6 @@ export default function StyleNavHeader({ styleObj }) {
               <ChevronRight size={18} />
             </Link>
 
-            <ThemeToggle styleId={styleObj.id} />
           </div>
         </div>
 

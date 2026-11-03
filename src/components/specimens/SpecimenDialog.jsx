@@ -114,8 +114,8 @@ export default function SpecimenDialog({ styleId = 'neo-brutalism' }) {
             style={{
               width: '100%',
               maxWidth: '480px',
-              backgroundColor: styleId === 'glassmorphism' ? 'var(--glass-surface)' : styleId === 'claymorphism' ? 'var(--clay-light)' : 'var(--site-card)',
-              color: 'inherit',
+              backgroundColor: styleId === 'glassmorphism' ? 'var(--glass-surface)' : styleId === 'claymorphism' ? 'var(--clay-light)' : styleId === 'bento' ? 'var(--bento-surface)' : styleId === 'brutalism' ? 'var(--brutal-surface)' : styleId === 'retro-terminal' ? 'var(--term-surface)' : styleId === 'skeuomorphism' ? 'var(--skeuo-bg)' : 'var(--site-card)',
+              color: styleId === 'glassmorphism' ? 'var(--glass-ink)' : styleId === 'claymorphism' ? 'var(--clay-text-dark)' : styleId === 'bento' ? 'var(--bento-ink)' : styleId === 'brutalism' ? 'var(--brutal-ink)' : styleId === 'retro-terminal' ? 'var(--term-ink)' : styleId === 'skeuomorphism' ? 'var(--skeuo-ink)' : 'inherit',
               border: styleId === 'glassmorphism' ? '1px solid var(--glass-edge)' : styleId === 'brutalism' ? 'var(--brutal-border)' : 'var(--site-border)',
               borderRadius: styleId === 'brutalism' || styleId === 'swiss-editorial' ? '0px' : styleId === 'claymorphism' ? '28px' : '12px',
               boxShadow: styleId === 'neo-brutalism' ? '8px 8px 0 var(--neo-ink)' : styleId === 'claymorphism' ? 'var(--clay-inner-light), 0 20px 40px rgba(0,0,0,0.3)' : '0 20px 50px rgba(0,0,0,0.35)',

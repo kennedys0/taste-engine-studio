@@ -107,6 +107,21 @@ export default function SpecimenForm({ styleId = 'neo-brutalism' }) {
     }
   };
 
+  const getSecondaryButtonClass = () => {
+    switch (styleId) {
+      case 'glassmorphism': return 'glass-btn-secondary';
+      case 'claymorphism': return 'clay-btn-secondary';
+      case 'brutalism': return 'brutal-btn-secondary';
+      case 'minimalism': return 'mini-btn-secondary';
+      case 'swiss-editorial': return 'swiss-btn-secondary';
+      case 'bento': return 'bento-btn-secondary';
+      case 'skeuomorphism': return 'skeuo-btn-primary';
+      case 'retro-terminal': return 'term-btn-secondary';
+      case 'enterprise': return 'ent-btn-secondary';
+      default: return 'neo-btn-secondary';
+    }
+  };
+
   const inputClass = getInputClass();
   const btnClass = getButtonClass();
 
@@ -231,9 +246,9 @@ export default function SpecimenForm({ styleId = 'neo-brutalism' }) {
           className={inputClass}
           style={{ cursor: 'pointer' }}
         >
-          <option value="standard">Standard Web UI (SPA)</option>
-          <option value="enterprise">Enterprise Data Console</option>
-          <option value="creative">Creative Portfolio / Landing</option>
+          <option value="standard" style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Standard Web UI (SPA)</option>
+          <option value="enterprise" style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Enterprise Data Console</option>
+          <option value="creative" style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Creative Portfolio / Landing</option>
         </select>
       </div>
 
@@ -245,7 +260,7 @@ export default function SpecimenForm({ styleId = 'neo-brutalism' }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <label
             htmlFor={`file-${styleId}`}
-            className={styleId === 'neo-brutalism' ? 'neo-btn-secondary' : 'mini-btn-secondary'}
+            className={getSecondaryButtonClass()}
             style={{ cursor: 'pointer', padding: '8px 16px', fontSize: '0.875rem' }}
           >
             <Upload size={16} />

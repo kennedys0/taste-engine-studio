@@ -54,6 +54,32 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
   const isGlass = styleId === 'glassmorphism';
   const isClay = styleId === 'claymorphism';
   const isTerm = styleId === 'retro-terminal';
+  const getPrimaryBtnClass = () => {
+    switch (styleId) {
+      case 'glassmorphism': return 'glass-btn-primary';
+      case 'claymorphism': return 'clay-btn-primary';
+      case 'brutalism': return 'brutal-btn-primary';
+      case 'minimalism': return 'mini-btn-primary';
+      case 'swiss-editorial': return 'swiss-btn-primary';
+      case 'bento': return 'bento-btn-primary';
+      case 'skeuomorphism': return 'skeuo-btn-primary';
+      case 'retro-terminal': return 'term-btn-primary';
+      case 'enterprise': return 'ent-btn-primary';
+      default: return 'neo-btn-primary';
+    }
+  };
+
+  const getContainerClass = () => {
+    if (isEnterprise) return 'ent-table-container';
+    if (isGlass) return 'glass-pane';
+    if (isBrutal) return 'brutal-card';
+    if (isClay) return 'clay-card';
+    if (styleId === 'bento') return 'bento-tile';
+    if (styleId === 'skeuomorphism') return 'skeuo-panel';
+    if (styleId === 'retro-terminal') return 'term-window';
+    return 'neo-card';
+  };
+
 
   return (
     <div style={{ width: '100%', maxWidth: '960px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -160,12 +186,10 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
 
       {/* Table Container */}
       <div
-        className={isEnterprise ? 'ent-table-container' : isGlass ? 'glass-pane' : isBrutal ? 'brutal-card' : ''}
+        className={getContainerClass()}
         style={{
           overflowX: 'auto',
-          border: isEnterprise || isGlass || isBrutal ? undefined : '1px solid currentColor',
-          borderRadius: isBrutal ? '0px' : '8px',
-          padding: isGlass ? '1rem' : isBrutal ? '0' : undefined,
+          padding: isBrutal ? '0' : isEnterprise ? '0' : '1.5rem',
         }}
       >
         <table
@@ -223,7 +247,7 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
                   <button
                     type="button"
                     onClick={resetFilters}
-                    className={styleId === 'neo-brutalism' ? 'neo-btn-primary' : 'mini-btn-primary'}
+                    className={getPrimaryBtnClass()}
                     style={{ padding: '8px 18px', fontSize: '0.85rem' }}
                   >
                     Reset All Filters

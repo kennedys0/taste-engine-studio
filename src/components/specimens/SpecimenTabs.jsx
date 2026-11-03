@@ -102,21 +102,99 @@ export default function SpecimenTabs({ styleId = 'neo-brutalism' }) {
       {/* Tab panel */}
       {tabs.map((tab) => {
         if (activeTab !== tab.id) return null;
+
+        let panelStyle = {
+          padding: '1.5rem',
+          fontSize: '0.95rem',
+          lineHeight: '1.6',
+        };
+
+        if (styleId === 'glassmorphism') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--glass-surface)',
+            border: '1px solid var(--glass-edge)',
+            borderRadius: '16px',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            color: 'var(--glass-ink)',
+            boxShadow: 'var(--glass-shadow)',
+          };
+        } else if (styleId === 'claymorphism') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--clay-light)',
+            borderRadius: '24px',
+            boxShadow: 'var(--clay-inner-light), var(--clay-shadow-light)',
+            color: 'var(--clay-text-dark)',
+          };
+        } else if (styleId === 'neo-brutalism') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--neo-card)',
+            border: 'var(--neo-border)',
+            borderRadius: 'var(--neo-radius)',
+            boxShadow: 'var(--neo-shadow-md)',
+            color: 'var(--neo-ink)',
+          };
+        } else if (styleId === 'brutalism') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--brutal-surface)',
+            border: 'var(--brutal-border)',
+            borderRadius: '0px',
+            color: 'var(--brutal-ink)',
+          };
+        } else if (styleId === 'bento') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--bento-surface)',
+            border: 'var(--bento-border)',
+            borderRadius: 'var(--bento-radius)',
+            boxShadow: 'var(--bento-shadow)',
+            color: 'var(--bento-ink)',
+          };
+        } else if (styleId === 'skeuomorphism') {
+          panelStyle = {
+            ...panelStyle,
+            background: 'var(--skeuo-chassis)',
+            border: 'var(--skeuo-panel-border)',
+            borderRadius: 'var(--skeuo-radius)',
+            boxShadow: 'var(--skeuo-highlight), 0 8px 24px rgba(0,0,0,0.35)',
+            color: 'var(--skeuo-ink)',
+          };
+        } else if (styleId === 'retro-terminal') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--term-surface)',
+            border: 'var(--term-border)',
+            borderRadius: 'var(--term-radius)',
+            color: 'var(--term-ink)',
+          };
+        } else if (styleId === 'enterprise') {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'var(--ent-surface)',
+            border: 'var(--ent-border)',
+            borderRadius: 'var(--ent-radius)',
+            color: 'var(--ent-ink)',
+          };
+        } else {
+          panelStyle = {
+            ...panelStyle,
+            backgroundColor: 'transparent',
+            border: '1px solid rgba(125, 125, 125, 0.2)',
+            borderRadius: '8px',
+          };
+        }
+
         return (
           <div
             key={tab.id}
             role="tabpanel"
             id={`tabpanel-${tab.id}`}
             aria-labelledby={`tab-${tab.id}`}
-            style={{
-              padding: '1.5rem',
-              backgroundColor: styleId === 'glassmorphism' ? 'var(--glass-surface)' : 'rgba(125, 125, 125, 0.05)',
-              border: styleId === 'glassmorphism' ? '1px solid var(--glass-edge)' : '1px solid rgba(125, 125, 125, 0.2)',
-              borderRadius: styleId === 'brutalism' || styleId === 'swiss-editorial' ? '0px' : '8px',
-              backdropFilter: styleId === 'glassmorphism' ? 'blur(12px)' : 'none',
-              fontSize: '0.95rem',
-              lineHeight: '1.6',
-            }}
+            style={panelStyle}
           >
             <p>{tab.content}</p>
           </div>

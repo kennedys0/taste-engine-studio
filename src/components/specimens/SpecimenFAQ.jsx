@@ -34,6 +34,7 @@ export default function SpecimenFAQ({ styleId = 'neo-brutalism', items = FAQ_ITE
           itemStyle = {
             ...itemStyle,
             backgroundColor: 'var(--glass-surface)',
+            color: 'var(--glass-ink)',
             border: '1px solid var(--glass-edge)',
             borderRadius: '16px',
             boxShadow: 'var(--glass-shadow)',
@@ -44,6 +45,7 @@ export default function SpecimenFAQ({ styleId = 'neo-brutalism', items = FAQ_ITE
           itemStyle = {
             ...itemStyle,
             backgroundColor: 'var(--clay-light)',
+            color: 'var(--clay-text-dark)',
             borderRadius: '20px',
             boxShadow: 'var(--clay-inner-light), var(--clay-shadow-light)',
           };
@@ -73,6 +75,7 @@ export default function SpecimenFAQ({ styleId = 'neo-brutalism', items = FAQ_ITE
           itemStyle = {
             ...itemStyle,
             backgroundColor: 'var(--bento-surface)',
+            color: 'var(--bento-ink)',
             border: 'var(--bento-border)',
             borderRadius: '16px',
           };

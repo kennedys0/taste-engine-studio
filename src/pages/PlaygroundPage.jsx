@@ -236,7 +236,7 @@ export default function PlaygroundPage() {
             width: viewportPreset,
             maxWidth: '100%',
             transition: 'width 240ms ease-out',
-            border: viewportPreset !== '100%' ? '3px dashed #121212' : 'none',
+            border: viewportPreset !== '100%' ? '3px dashed var(--site-ink)' : 'none',
             borderRadius: viewportPreset !== '100%' ? '16px' : '0',
             padding: viewportPreset !== '100%' ? '1.5rem' : '0',
             backgroundColor: viewportPreset !== '100%' ? 'var(--site-bg)' : 'transparent',
