@@ -171,7 +171,7 @@ export default function ComparePage() {
               }}
             >
               {STYLES.map((s) => (
-                <option key={s.id} value={s.id}>
+                <option key={s.id} value={s.id} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>
                   {s.label}
                 </option>
               ))}
@@ -223,7 +223,7 @@ export default function ComparePage() {
               }}
             >
               {STYLES.map((s) => (
-                <option key={s.id} value={s.id}>
+                <option key={s.id} value={s.id} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>
                   {s.label}
                 </option>
               ))}

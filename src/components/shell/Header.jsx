@@ -78,7 +78,7 @@ export default function Header() {
             <Sparkles size={20} strokeWidth={2.5} />
           </div>
           <span>
-            TASTE <span style={{ backgroundColor: 'var(--site-accent)', padding: '2px 6px', border: '1.5px solid var(--site-ink)', borderRadius: '4px' }}>ENGINE</span>
+            TASTE <span style={{ backgroundColor: 'var(--site-accent)', color: '#121212', padding: '2px 6px', border: '1.5px solid var(--site-ink)', borderRadius: '4px' }}>ENGINE</span>
           </span>
         </Link>
 
@@ -98,7 +98,7 @@ export default function Header() {
               style={({ isActive }) => ({
                 fontWeight: isActive ? '800' : '600',
                 fontSize: '0.925rem',
-                color: 'var(--site-ink)',
+                color: isActive ? '#121212' : 'var(--site-ink)',
                 textDecoration: 'none',
                 padding: '6px 12px',
                 borderRadius: 'var(--site-radius)',

@@ -69,8 +69,8 @@ export default function SpecimenTabs({ styleId = 'neo-brutalism' }) {
           } else if (styleId === 'brutalism') {
             tabStyle = {
               ...tabStyle,
-              backgroundColor: isActive ? '#000000' : '#ffffff',
-              color: isActive ? '#ffffff' : '#000000',
+              backgroundColor: isActive ? 'var(--brutal-ink)' : 'var(--brutal-bg)',
+              color: isActive ? 'var(--brutal-bg)' : 'var(--brutal-ink)',
               border: 'var(--brutal-border)',
             };
           } else {

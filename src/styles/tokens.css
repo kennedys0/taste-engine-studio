@@ -19,6 +19,21 @@
   --site-font-body: 'Space Grotesk', system-ui, sans-serif;
   --site-font-mono: 'JetBrains Mono', 'IBM Plex Mono', monospace;
   --header-height: 72px;
+
+  /* Global Neo-brutalist Token Fallbacks */
+  --neo-bg: var(--site-bg);
+  --neo-ink: var(--site-ink);
+  --neo-card: var(--site-card);
+  --neo-accent-primary: var(--site-accent);
+  --neo-accent-secondary: var(--site-accent-secondary);
+  --neo-accent-cyan: var(--site-accent-cyan);
+  --neo-accent-mint: #00f0a8;
+  --neo-border: var(--site-border);
+  --neo-shadow-sm: var(--site-shadow-sm);
+  --neo-shadow-md: var(--site-shadow-md);
+  --neo-shadow-lg: var(--site-shadow-lg);
+  --neo-radius: var(--site-radius);
+  --neo-font: var(--site-font-body);
 }
 
 [data-theme="dark"] {
@@ -32,6 +47,15 @@
   --site-shadow-sm: 3px 3px 0 #fdfdfd;
   --site-shadow-md: 5px 5px 0 #fdfdfd;
   --site-shadow-lg: 8px 8px 0 #fdfdfd;
+
+  /* Global Neo-brutalist Dark Fallbacks */
+  --neo-bg: var(--site-bg);
+  --neo-ink: var(--site-ink);
+  --neo-card: var(--site-card);
+  --neo-border: var(--site-border);
+  --neo-shadow-sm: var(--site-shadow-sm);
+  --neo-shadow-md: var(--site-shadow-md);
+  --neo-shadow-lg: var(--site-shadow-lg);
 }
 
 /* Base resets & layout rules */
@@ -100,4 +124,3 @@ button {
     scroll-behavior: auto !important;
   }
 }
-

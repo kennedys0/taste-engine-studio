@@ -23,7 +23,9 @@
   text-shadow: var(--term-amber-glow);
 }
 
-[data-taste-style="retro-terminal"][data-theme="light"] {
+[data-theme="light"] [data-taste-style="retro-terminal"],
+[data-taste-style="retro-terminal"][data-theme="light"],
+[data-theme="light"][data-taste-style="retro-terminal"] {
   --term-bg: #f4f1ea;
   --term-surface: #eae5da;
   --term-amber: #7c4a03;
@@ -37,6 +39,7 @@
 /* Terminal Window Frame */
 .term-window {
   background-color: var(--term-surface);
+  color: var(--term-ink);
   border: var(--term-border);
   border-radius: var(--term-radius);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.75);
@@ -114,6 +117,12 @@
   text-shadow: var(--term-amber-glow);
 }
 
+[data-theme="light"] [data-taste-style="retro-terminal"] .term-input,
+[data-taste-style="retro-terminal"][data-theme="light"] .term-input {
+  background-color: rgba(255, 255, 255, 0.6);
+  text-shadow: none;
+}
+
 .term-input:focus {
   outline: none;
   border-color: var(--term-amber);
@@ -132,4 +141,3 @@
   color: var(--term-green);
   font-weight: 700;
 }
-

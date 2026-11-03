@@ -19,7 +19,9 @@
   font-family: var(--swiss-font);
 }
 
-[data-taste-style="swiss-editorial"][data-theme="dark"] {
+[data-theme="dark"] [data-taste-style="swiss-editorial"],
+[data-taste-style="swiss-editorial"][data-theme="dark"],
+[data-theme="dark"][data-taste-style="swiss-editorial"] {
   --swiss-bg: #111113;
   --swiss-ink: #f5f5f7;
   --swiss-muted: #9999a0;
@@ -32,6 +34,7 @@
 /* Swiss Editorial Card / Section */
 .swiss-card {
   background-color: var(--swiss-surface);
+  color: var(--swiss-ink);
   border-top: var(--swiss-rule);
   border-bottom: var(--swiss-rule-subtle);
   border-radius: 0px !important;
@@ -115,4 +118,3 @@
   outline: none;
   border-bottom-color: var(--swiss-accent);
 }
-

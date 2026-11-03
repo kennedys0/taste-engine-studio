@@ -21,7 +21,9 @@
   font-family: var(--bento-font);
 }
 
-[data-taste-style="bento"][data-theme="light"] {
+[data-theme="light"] [data-taste-style="bento"],
+[data-taste-style="bento"][data-theme="light"],
+[data-theme="light"][data-taste-style="bento"] {
   --bento-bg: #f8f9fa;
   --bento-surface: #ffffff;
   --bento-surface-hover: #f1f3f5;
@@ -35,6 +37,7 @@
 /* Bento Tile Base */
 .bento-tile {
   background-color: var(--bento-surface);
+  color: var(--bento-ink);
   border: var(--bento-border);
   border-radius: var(--bento-radius);
   box-shadow: var(--bento-shadow);
@@ -89,8 +92,18 @@
   transition: background-color 140ms ease-out;
 }
 
+[data-theme="light"] [data-taste-style="bento"] .bento-btn-secondary,
+[data-taste-style="bento"][data-theme="light"] .bento-btn-secondary {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .bento-btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="light"] [data-taste-style="bento"] .bento-btn-secondary:hover,
+[data-taste-style="bento"][data-theme="light"] .bento-btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 /* Bento Input */
@@ -105,8 +118,12 @@
   transition: border-color 140ms ease-out;
 }
 
+[data-theme="light"] [data-taste-style="bento"] .bento-input,
+[data-taste-style="bento"][data-theme="light"] .bento-input {
+  background-color: #ffffff;
+}
+
 .bento-input:focus {
   outline: none;
   border-color: var(--bento-accent);
 }
-

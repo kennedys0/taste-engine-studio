@@ -20,7 +20,9 @@
   font-family: var(--brutal-font-body);
 }
 
-[data-taste-style="brutalism"][data-theme="dark"] {
+[data-theme="dark"] [data-taste-style="brutalism"],
+[data-taste-style="brutalism"][data-theme="dark"],
+[data-theme="dark"][data-taste-style="brutalism"] {
   --brutal-bg: #000000;
   --brutal-ink: #ffffff;
   --brutal-surface: #0a0a0a;
@@ -31,6 +33,7 @@
 /* Brutalist Structural Card */
 .brutal-card {
   background-color: var(--brutal-surface);
+  color: var(--brutal-ink);
   border: var(--brutal-border);
   border-radius: 0px !important;
   box-shadow: none !important;
@@ -112,4 +115,3 @@
   text-transform: uppercase;
   color: var(--brutal-signal);
 }
-

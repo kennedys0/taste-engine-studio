@@ -130,7 +130,7 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
             }}
           >
             {CATEGORIES.map((c) => (
-              <option key={c} value={c} style={{ color: '#121212' }}>Category: {c}</option>
+              <option key={c} value={c} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Category: {c}</option>
             ))}
           </select>
 
@@ -152,7 +152,7 @@ export default function SpecimenDataTable({ styleId = 'neo-brutalism' }) {
             }}
           >
             {STATUSES.map((s) => (
-              <option key={s} value={s} style={{ color: '#121212' }}>Status: {s}</option>
+              <option key={s} value={s} style={{ backgroundColor: 'var(--site-card)', color: 'var(--site-ink)' }}>Status: {s}</option>
             ))}
           </select>
         </div>

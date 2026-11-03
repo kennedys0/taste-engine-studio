@@ -90,6 +90,7 @@ export default function HomePage() {
               <span
                 style={{
                   backgroundColor: 'var(--site-accent)',
+                  color: '#121212',
                   padding: '2px 8px',
                   border: 'var(--site-border)',
                   borderRadius: 'var(--site-radius)',
@@ -142,55 +143,73 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Verified CLI snippet with working copy button */}
+            {/* Verified CLI snippet with auto-copy and icon-only copy button */}
             <div
+              onClick={() => copy(installCommand)}
+              title={copyStatus === 'success' ? 'Copied to clipboard!' : 'Click to copy command'}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  copy(installCommand);
+                }
+              }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '10px',
-                padding: '10px 16px',
+                padding: '8px 10px 8px 14px',
                 backgroundColor: 'var(--site-card)',
                 border: 'var(--site-border)',
                 borderRadius: 'var(--site-radius)',
                 boxShadow: 'var(--site-shadow-sm)',
                 maxWidth: '100%',
+                cursor: 'pointer',
+                userSelect: 'none',
+                transition: 'transform 120ms ease-out, box-shadow 120ms ease-out',
               }}
             >
               <Terminal size={16} style={{ flexShrink: 0, opacity: 0.7 }} />
               <code
+                className="no-scrollbar"
                 style={{
                   fontFamily: 'var(--site-font-mono)',
                   fontSize: '0.85rem',
                   fontWeight: '600',
                   overflowX: 'auto',
                   whiteSpace: 'nowrap',
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none',
+                  userSelect: 'text',
                 }}
               >
                 {installCommand}
               </code>
               <button
                 type="button"
-                onClick={() => copy(installCommand)}
-                aria-label="Copy install command to clipboard"
-                title="Copy install command"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  copy(installCommand);
+                }}
+                aria-label={copyStatus === 'success' ? 'Copied to clipboard' : 'Copy install command'}
+                title={copyStatus === 'success' ? 'Copied!' : 'Copy command'}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '4px',
-                  padding: '4px 8px',
+                  justifyContent: 'center',
+                  width: '32px',
+                  height: '32px',
                   border: '1.5px solid var(--site-ink)',
                   borderRadius: '4px',
                   backgroundColor: copyStatus === 'success' ? '#10b981' : 'var(--site-accent)',
                   color: copyStatus === 'success' ? '#ffffff' : '#121212',
-                  fontWeight: '700',
-                  fontSize: '0.75rem',
                   cursor: 'pointer',
                   flexShrink: 0,
-                  transition: 'background-color 140ms',
+                  transition: 'background-color 140ms ease-out',
                 }}
               >
-                {copyStatus === 'success' ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copyStatus === 'success' ? 'Copied!' : 'Copy'}</span>
+                {copyStatus === 'success' ? <Check size={16} /> : <Copy size={16} />}
               </button>
             </div>
           </div>

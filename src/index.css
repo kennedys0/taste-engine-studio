@@ -37,6 +37,16 @@
   border-width: 0;
 }
 
+/* Scrollbar suppression utility */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox & modern browsers */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge, Opera */
+}
+
 /* Skip link */
 .skip-link {
   position: absolute;
@@ -55,4 +65,3 @@
 .skip-link:focus {
   top: 1rem;
 }
-

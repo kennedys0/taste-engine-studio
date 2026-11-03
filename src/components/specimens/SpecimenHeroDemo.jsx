@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Sparkles, Layers, Sliders, CheckCircle2 } from 'lucide-react';
 import SpecimenImageCard from './SpecimenImageCard';
 
 export default function SpecimenHeroDemo() {
@@ -20,7 +19,7 @@ export default function SpecimenHeroDemo() {
         alignItems: 'center',
         gap: '1rem',
         width: '100%',
-        maxWidth: '460px',
+        maxWidth: '380px',
       }}
     >
       {/* Live Style Switcher Pills */}
@@ -37,6 +36,7 @@ export default function SpecimenHeroDemo() {
           border: 'var(--site-border)',
           borderRadius: 'var(--site-radius)',
           boxShadow: 'var(--site-shadow-sm)',
+          width: '100%',
         }}
       >
         {demoStyles.map((item) => {
@@ -65,16 +65,19 @@ export default function SpecimenHeroDemo() {
         })}
       </div>
 
-      {/* Rendered Specimen in selected style */}
+      {/* Rendered Specimen in selected style: exact 380px x 430px card, no background wrapper */}
       <div
         data-taste-style={selectedStyle}
         style={{
           width: '100%',
+          maxWidth: '380px',
+          height: '430px',
+          background: 'transparent',
+          backgroundColor: 'transparent',
+          padding: '0',
           display: 'flex',
           justifyContent: 'center',
-          padding: selectedStyle === 'glassmorphism' ? '1.5rem' : '0',
-          borderRadius: '16px',
-          transition: 'all 200ms ease-out',
+          alignItems: 'stretch',
         }}
       >
         <SpecimenImageCard
@@ -93,4 +96,3 @@ export default function SpecimenHeroDemo() {
     </div>
   );
 }
-

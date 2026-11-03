@@ -25,7 +25,9 @@
   font-family: var(--skeuo-font);
 }
 
-[data-taste-style="skeuomorphism"][data-theme="light"] {
+[data-theme="light"] [data-taste-style="skeuomorphism"],
+[data-taste-style="skeuomorphism"][data-theme="light"],
+[data-theme="light"][data-taste-style="skeuomorphism"] {
   --skeuo-chassis: linear-gradient(180deg, #edf0f5 0%, #d8dde6 100%);
   --skeuo-panel-border: 1px solid #b8bec9;
   --skeuo-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.85);
@@ -41,6 +43,7 @@
 /* Skeuomorphic Hardware Panel */
 .skeuo-panel {
   background: var(--skeuo-chassis);
+  color: var(--skeuo-ink);
   border: var(--skeuo-panel-border);
   border-radius: var(--skeuo-radius);
   box-shadow: var(--skeuo-highlight), 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -86,6 +89,12 @@
   transition: border-color 140ms ease-out;
 }
 
+[data-theme="light"] [data-taste-style="skeuomorphism"] .skeuo-well,
+[data-taste-style="skeuomorphism"][data-theme="light"] .skeuo-well {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 .skeuo-well:focus {
   outline: none;
   border-color: var(--skeuo-led-green);
@@ -101,4 +110,3 @@
   background-color: var(--skeuo-led-green);
   box-shadow: 0 0 8px var(--skeuo-led-green), inset 0 1px 1px rgba(255, 255, 255, 0.65);
 }
-

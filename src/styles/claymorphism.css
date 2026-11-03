@@ -34,10 +34,12 @@
   font-family: var(--clay-font);
 }
 
-[data-taste-style="claymorphism"][data-theme="dark"] {
+[data-theme="dark"] [data-taste-style="claymorphism"],
+[data-taste-style="claymorphism"][data-theme="dark"],
+[data-theme="dark"][data-taste-style="claymorphism"] {
   --clay-bg: #19142b;
-  --clay-primary: #7c3aed;
-  --clay-primary-hover: #6d28d9;
+  --clay-primary: #8b5cf6;
+  --clay-primary-hover: #7c3aed;
   --clay-light: #2c2547;
   --clay-light-hover: #362e57;
   --clay-text-dark: #f1f0f7;
@@ -142,4 +144,3 @@
   border-color: var(--clay-primary);
   box-shadow: var(--clay-inner-well), 0 0 0 3px rgba(129, 63, 252, 0.25);
 }
-

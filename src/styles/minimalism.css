@@ -20,7 +20,9 @@
   font-family: var(--mini-font);
 }
 
-[data-taste-style="minimalism"][data-theme="dark"] {
+[data-theme="dark"] [data-taste-style="minimalism"],
+[data-taste-style="minimalism"][data-theme="dark"],
+[data-theme="dark"][data-taste-style="minimalism"] {
   --mini-bg: #121214;
   --mini-ink: #f4f4f5;
   --mini-muted: #a1a1aa;
@@ -34,6 +36,7 @@
 /* Minimalist Card */
 .mini-card {
   background-color: var(--mini-surface);
+  color: var(--mini-ink);
   border: var(--mini-border);
   border-radius: var(--mini-radius);
   box-shadow: var(--mini-shadow);
@@ -85,7 +88,7 @@
 }
 
 .mini-btn-secondary:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: rgba(125, 125, 125, 0.12);
   border-color: var(--mini-border-hover);
 }
 
@@ -105,4 +108,3 @@
   outline: none;
   border-color: var(--mini-ink);
 }
-

@@ -528,7 +528,7 @@ export default function StyleOverviewPage() {
       <section style={{ padding: '4rem 1.5rem', borderTop: '2px solid rgba(125, 125, 125, 0.2)' }}>
         <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ marginBottom: '2.5rem' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent)' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
               Design DNA & Tokens
             </span>
             <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.4rem' }}>
@@ -565,7 +565,7 @@ export default function StyleOverviewPage() {
         <div className="container" style={{ maxWidth: '960px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent)' }}>
+              <span style={{ fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
                 Live Laboratory
               </span>
               <h2 style={{ fontSize: '2.2rem', fontWeight: '800', marginTop: '0.4rem' }}>
