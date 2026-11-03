@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import {
-  Sliders,
   Monitor,
   Tablet,
   Smartphone,
@@ -19,9 +18,9 @@ import {
   Palette,
   Compass,
   ArrowRight,
-  Maximize2,
-  CheckCircle2,
   Sparkles,
+  ChevronRight,
+  SlidersHorizontal,
 } from 'lucide-react';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { SPECIMEN_CATEGORIES } from '../data/specimenCatalog';
@@ -36,21 +35,20 @@ import SpecimenDialog from '../components/specimens/SpecimenDialog';
 import SpecimenFAQ from '../components/specimens/SpecimenFAQ';
 
 /**
- * Stage background styling tailored to reveal the distinctive physics of each style
+ * Authentic Stage Physics: Background styling reflecting the true material constraints of each style
  */
 function getStageStyle(styleId) {
   switch (styleId) {
     case 'glassmorphism':
       return {
         background: `
-          radial-gradient(ellipse 65% 55% at 20% 35%, rgba(99, 164, 255, 0.40) 0%, transparent 70%),
-          radial-gradient(ellipse 55% 50% at 85% 65%, rgba(196, 181, 253, 0.45) 0%, transparent 70%),
-          radial-gradient(ellipse 50% 50% at 50% 85%, rgba(147, 197, 253, 0.35) 0%, transparent 70%),
+          radial-gradient(ellipse 65% 55% at 20% 35%, rgba(99, 164, 255, 0.35) 0%, transparent 70%),
+          radial-gradient(ellipse 55% 50% at 85% 65%, rgba(196, 181, 253, 0.40) 0%, transparent 70%),
           linear-gradient(135deg, rgba(240, 246, 255, 0.95) 0%, rgba(226, 237, 252, 0.95) 100%)
         `,
-        border: '1px solid var(--glass-edge, rgba(255, 255, 255, 0.6))',
-        boxShadow: 'var(--glass-shadow, 0 20px 50px rgba(28, 76, 156, 0.16))',
-        position: 'relative',
+        border: '1px solid var(--glass-edge, rgba(255, 255, 255, 0.7))',
+        boxShadow: 'var(--glass-shadow, 0 20px 50px rgba(28, 76, 156, 0.15))',
+        borderRadius: '24px',
       };
     case 'retro-terminal':
       return {
@@ -58,11 +56,12 @@ function getStageStyle(styleId) {
         color: 'var(--term-ink, #523102)',
         border: 'var(--term-border, 1px solid rgba(124, 74, 3, 0.35))',
         boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.65), 0 8px 30px rgba(0, 0, 0, 0.5)',
+        borderRadius: '8px',
       };
     case 'claymorphism':
       return {
         backgroundColor: 'var(--clay-bg, #f3f0fa)',
-        borderRadius: '28px',
+        borderRadius: '32px',
         boxShadow: 'inset 3px 3px 10px rgba(0, 0, 0, 0.05), inset -3px -3px 10px rgba(255, 255, 255, 0.7)',
         border: 'none',
       };
@@ -76,9 +75,9 @@ function getStageStyle(styleId) {
       };
     case 'bento':
       return {
-        backgroundColor: 'var(--bento-surface, #ffffff)',
+        backgroundColor: 'var(--bento-surface, #f9fafb)',
         border: 'var(--bento-border, 1px solid rgba(0, 0, 0, 0.08))',
-        borderRadius: '20px',
+        borderRadius: '24px',
         boxShadow: 'var(--bento-shadow, 0 8px 24px rgba(0, 0, 0, 0.06))',
       };
     case 'skeuomorphism':
@@ -86,13 +85,13 @@ function getStageStyle(styleId) {
         background: 'var(--skeuo-chassis, linear-gradient(180deg, #edf0f5 0%, #d8dde6 100%))',
         border: 'var(--skeuo-panel-border, 1px solid #b8bec9)',
         boxShadow: 'var(--skeuo-highlight, inset 0 1px 0 rgba(255, 255, 255, 0.85)), 0 12px 32px rgba(0, 0, 0, 0.25)',
-        borderRadius: '16px',
+        borderRadius: '20px',
       };
     case 'enterprise':
       return {
         backgroundColor: 'var(--ent-surface, #ffffff)',
         border: 'var(--ent-border, 1px solid #e5e7eb)',
-        borderRadius: '8px',
+        borderRadius: '12px',
         boxShadow: 'var(--ent-shadow, 0 1px 3px rgba(0, 0, 0, 0.05))',
       };
     case 'swiss-editorial':
@@ -107,7 +106,7 @@ function getStageStyle(styleId) {
       return {
         backgroundColor: 'var(--mini-surface, #ffffff)',
         border: 'var(--mini-border, 1px solid rgba(0, 0, 0, 0.08))',
-        borderRadius: '12px',
+        borderRadius: '16px',
         boxShadow: 'var(--mini-shadow, 0 1px 3px rgba(0, 0, 0, 0.04))',
       };
     case 'neo-brutalism':
@@ -115,13 +114,13 @@ function getStageStyle(styleId) {
         backgroundColor: 'var(--neo-card, #ffffff)',
         border: 'var(--neo-border, 2.5px solid #121212)',
         boxShadow: 'var(--neo-shadow-sm, 3px 3px 0 #121212)',
-        borderRadius: 'var(--neo-radius, 6px)',
+        borderRadius: 'var(--neo-radius, 8px)',
       };
     default:
       return {
         backgroundColor: 'var(--site-card, #ffffff)',
         border: '1px solid rgba(125, 125, 125, 0.2)',
-        borderRadius: '8px',
+        borderRadius: '12px',
       };
   }
 }
@@ -173,37 +172,38 @@ export default function PlaygroundPage() {
     navigate(`/${targetStyleId}/playground`);
   };
 
+  const isFocusedCategory = activeCategory !== 'all';
+  const activeCategoryObj = SPECIMEN_CATEGORIES.find((c) => c.id === activeCategory);
+
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem', maxWidth: '1360px', width: '100%' }}>
+    <div className="container" style={{ padding: '2.5rem 1.5rem 4rem', maxWidth: '1360px', width: '100%', fontFamily: 'var(--site-font-body)' }}>
       {/* =========================================================================
-          1. Playground Header & Live Style Switcher
+          1. Header Area: Clean, Refined & Spacious
           ========================================================================= */}
-      <div style={{ marginBottom: '2rem', fontFamily: 'var(--site-font-body)' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.25rem' }}>
+      <div style={{ marginBottom: '1.75rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '1.25rem' }}>
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 10px', borderRadius: '4px', backgroundColor: 'rgba(139, 92, 246, 0.12)', border: '1px solid rgba(139, 92, 246, 0.3)', marginBottom: '0.5rem' }}>
-              <Sparkles size={14} color="#8b5cf6" />
-              <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
-                Component Laboratory & Specimen Workbench
-              </span>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', borderRadius: '9999px', backgroundColor: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.4rem' }}>
+              <Sparkles size={13} />
+              <span>Interactive Component Laboratory</span>
             </div>
-            <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)', fontWeight: '700', letterSpacing: '-0.02em', lineHeight: 1.15, fontFamily: 'var(--site-font-body)' }}>
+            <h1 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.6rem)', fontWeight: '700', letterSpacing: '-0.02em', margin: 0, lineHeight: 1.2 }}>
               {styleObj.label} Playground
             </h1>
-            <div style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}>
-              <p style={{ fontSize: '0.95rem', opacity: 0.85, margin: 0, maxWidth: '720px', lineHeight: 1.5, fontFamily: 'var(--site-font-body)' }}>
+            <div style={{ minHeight: '36px', display: 'flex', alignItems: 'center' }}>
+              <p style={{ fontSize: '0.95rem', opacity: 0.8, margin: 0, maxWidth: '640px', lineHeight: 1.5 }}>
                 {styleObj.tagline}
               </p>
             </div>
           </div>
 
-          {/* Quick Subroute Action Pills: using authentic style-specific primary/secondary buttons */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.625rem', alignItems: 'center' }}>
+          {/* Quick Subroute Actions */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <Link
               to={`/${styleObj.id}/login`}
               className={themeClasses.btnSecondary}
-              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-              title="Inspect dedicated full-screen authentication experience"
+              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              title="Full-screen authentication demo"
             >
               <Lock size={14} />
               <span>Auth Demo</span>
@@ -211,8 +211,8 @@ export default function PlaygroundPage() {
             <Link
               to={`/${styleObj.id}/dashboard`}
               className={themeClasses.btnSecondary}
-              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-              title="Inspect dense operational dashboard experience"
+              style={{ padding: '8px 14px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              title="Operational dashboard demo"
             >
               <Grid size={14} />
               <span>Dashboard Demo</span>
@@ -220,34 +220,33 @@ export default function PlaygroundPage() {
             <Link
               to={`/${styleObj.id}`}
               className={themeClasses.btnPrimary}
-              style={{ padding: '8px 16px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-              title="View full style overview and architectural specification"
+              style={{ padding: '8px 16px', fontSize: '0.85rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+              title="View full architectural specification"
             >
-              <span>Style Overview</span>
+              <span>Overview</span>
               <ArrowRight size={14} />
             </Link>
           </div>
         </div>
 
-        {/* Live 10-Style Fast Switcher Track: Neutral chrome ensures zero cross-style contamination */}
+        {/* Live 10-Style Switcher Track */}
         <div
           style={{
             marginTop: '1.25rem',
-            padding: '8px 12px',
-            backgroundColor: 'rgba(125, 125, 125, 0.06)',
-            border: '1px solid rgba(125, 125, 125, 0.2)',
+            padding: '6px 10px',
+            backgroundColor: 'rgba(125, 125, 125, 0.05)',
+            border: '1px solid rgba(125, 125, 125, 0.15)',
             borderRadius: '10px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
             overflowX: 'auto',
-            fontFamily: 'var(--site-font-body)',
           }}
         >
-          <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap', opacity: 0.75, marginRight: '4px' }}>
-            Style:
+          <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', opacity: 0.65, paddingLeft: '4px', whiteSpace: 'nowrap' }}>
+            Styles:
           </span>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'nowrap' }}>
+          <div style={{ display: 'flex', gap: '4px', flexWrap: 'nowrap' }}>
             {STYLES.map((s) => {
               const isCurrent = s.id === styleObj.id;
               return (
@@ -256,17 +255,16 @@ export default function PlaygroundPage() {
                   type="button"
                   onClick={() => handleStyleChange(s.id)}
                   style={{
-                    padding: '5px 12px',
-                    borderRadius: '4px',
-                    border: isCurrent ? '1.5px solid var(--site-ink)' : '1px solid transparent',
-                    backgroundColor: isCurrent ? 'var(--site-accent)' : 'transparent',
-                    color: isCurrent ? '#121212' : 'var(--site-ink)',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    border: isCurrent ? '1px solid var(--site-ink)' : '1px solid transparent',
+                    backgroundColor: isCurrent ? 'var(--site-ink)' : 'transparent',
+                    color: isCurrent ? 'var(--site-bg)' : 'var(--site-ink)',
+                    fontSize: '0.785rem',
                     fontWeight: '700',
-                    fontSize: '0.8rem',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
-                    fontFamily: 'var(--site-font-body)',
-                    transition: 'background-color 100ms ease-out, border-color 100ms ease-out',
+                    transition: 'all 120ms ease-out',
                   }}
                 >
                   {s.label}
@@ -278,123 +276,18 @@ export default function PlaygroundPage() {
       </div>
 
       {/* =========================================================================
-          2. Unified Control Toolbar (Viewport, State, Reset)
-             Uses active style's authentic card container and button classes
-          ========================================================================= */}
-      <div
-        className={themeClasses.card}
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1.25rem',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0.875rem 1.25rem',
-          marginBottom: '1.75rem',
-          fontFamily: 'var(--site-font-body)',
-        }}
-      >
-        {/* Viewport Simulation Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.825rem', fontWeight: '700', marginRight: '4px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Viewport:
-          </span>
-          <button
-            type="button"
-            onClick={() => setViewportPreset('100%')}
-            className={viewportPreset === '100%' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-            title="Full Width Responsive Fluid Canvas"
-          >
-            <Monitor size={14} />
-            <span>Fluid (100%)</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewportPreset('768px')}
-            className={viewportPreset === '768px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-            title="Tablet Width Simulator (768px)"
-          >
-            <Tablet size={14} />
-            <span>Tablet (768px)</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewportPreset('390px')}
-            className={viewportPreset === '390px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-            title="Mobile Width Simulator (390px)"
-          >
-            <Smartphone size={14} />
-            <span>Mobile (390px)</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setViewportPreset('320px')}
-            className={viewportPreset === '320px' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-            title="Narrow Mobile Simulator (320px)"
-          >
-            <Smartphone size={14} />
-            <span>Narrow (320px)</span>
-          </button>
-        </div>
-
-        {/* State Simulation & Reset */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <label htmlFor="state-switcher" style={{ fontSize: '0.825rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              State:
-            </label>
-            <select
-              id="state-switcher"
-              value={feedbackState}
-              onChange={(e) => setFeedbackState(e.target.value)}
-              className={themeClasses.input}
-              style={{
-                padding: '6px 10px',
-                fontSize: '0.825rem',
-                fontWeight: '700',
-                cursor: 'pointer',
-                fontFamily: 'var(--site-font-body)',
-              }}
-            >
-              <option value="default">Default State</option>
-              <option value="loading">Loading Skeleton</option>
-              <option value="error">Error Banner</option>
-              <option value="empty">Empty State</option>
-            </select>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleReset}
-            className={themeClasses.btnSecondary}
-            style={{ padding: '6px 12px', fontSize: '0.8rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
-            title="Reset playground viewports, states, and filters"
-          >
-            <RotateCcw size={14} />
-            <span>Reset</span>
-          </button>
-        </div>
-      </div>
-
-      {/* =========================================================================
-          3. Category Filter Navigation (11 Complete Categories)
-             Styled with authentic active/inactive buttons of the selected style
+          2. Category Segmented Control & Navigation
           ========================================================================= */}
       <div
         role="tablist"
         aria-label="Component categories"
         style={{
           display: 'flex',
-          gap: '8px',
+          gap: '6px',
           overflowX: 'auto',
-          paddingBottom: '0.75rem',
-          marginBottom: '2.5rem',
+          paddingBottom: '0.5rem',
+          marginBottom: '1rem',
           scrollbarWidth: 'thin',
-          fontFamily: 'var(--site-font-body)',
         }}
       >
         <button
@@ -403,7 +296,7 @@ export default function PlaygroundPage() {
           aria-selected={activeCategory === 'all'}
           onClick={() => setActiveCategory('all')}
           className={activeCategory === 'all' ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-          style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
+          style={{ padding: '6px 14px', fontSize: '0.825rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
         >
           <Sparkles size={14} />
           <span>All Specimens</span>
@@ -420,7 +313,7 @@ export default function PlaygroundPage() {
               aria-selected={isSelected}
               onClick={() => setActiveCategory(cat.id)}
               className={isSelected ? themeClasses.btnPrimary : themeClasses.btnSecondary}
-              style={{ padding: '7px 14px', fontSize: '0.85rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--site-font-body)' }}
+              style={{ padding: '6px 12px', fontSize: '0.825rem', fontWeight: '700', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
               title={cat.desc}
             >
               <Icon size={14} />
@@ -431,7 +324,153 @@ export default function PlaygroundPage() {
       </div>
 
       {/* =========================================================================
-          4. Viewport Simulation Canvas Frame
+          3. Canvas Inspector Toolbar (Device Presets, State, Reset)
+          ========================================================================= */}
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '8px 14px',
+          backgroundColor: 'rgba(125, 125, 125, 0.05)',
+          border: '1px solid rgba(125, 125, 125, 0.15)',
+          borderRadius: '10px',
+          marginBottom: '1.75rem',
+        }}
+      >
+        {/* Viewport Presets Toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: '700', marginRight: '4px', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: 0.7 }}>
+            Viewport:
+          </span>
+          <button
+            type="button"
+            onClick={() => setViewportPreset('100%')}
+            style={{
+              padding: '5px 10px',
+              fontSize: '0.785rem',
+              fontWeight: '700',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              borderRadius: '6px',
+              border: viewportPreset === '100%' ? '1px solid var(--site-ink)' : '1px solid transparent',
+              backgroundColor: viewportPreset === '100%' ? 'rgba(125, 125, 125, 0.14)' : 'transparent',
+              color: 'inherit',
+              cursor: 'pointer',
+            }}
+            title="Fluid responsive canvas"
+          >
+            <Monitor size={14} />
+            <span>Fluid (100%)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewportPreset('768px')}
+            style={{
+              padding: '5px 10px',
+              fontSize: '0.785rem',
+              fontWeight: '700',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              borderRadius: '6px',
+              border: viewportPreset === '768px' ? '1px solid var(--site-ink)' : '1px solid transparent',
+              backgroundColor: viewportPreset === '768px' ? 'rgba(125, 125, 125, 0.14)' : 'transparent',
+              color: 'inherit',
+              cursor: 'pointer',
+            }}
+            title="Tablet simulator (768px)"
+          >
+            <Tablet size={14} />
+            <span>Tablet (768px)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewportPreset('390px')}
+            style={{
+              padding: '5px 10px',
+              fontSize: '0.785rem',
+              fontWeight: '700',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              borderRadius: '6px',
+              border: viewportPreset === '390px' ? '1px solid var(--site-ink)' : '1px solid transparent',
+              backgroundColor: viewportPreset === '390px' ? 'rgba(125, 125, 125, 0.14)' : 'transparent',
+              color: 'inherit',
+              cursor: 'pointer',
+            }}
+            title="Mobile phone simulator (390px)"
+          >
+            <Smartphone size={14} />
+            <span>Mobile (390px)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewportPreset('320px')}
+            style={{
+              padding: '5px 10px',
+              fontSize: '0.785rem',
+              fontWeight: '700',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px',
+              borderRadius: '6px',
+              border: viewportPreset === '320px' ? '1px solid var(--site-ink)' : '1px solid transparent',
+              backgroundColor: viewportPreset === '320px' ? 'rgba(125, 125, 125, 0.14)' : 'transparent',
+              color: 'inherit',
+              cursor: 'pointer',
+            }}
+            title="Compact mobile simulator (320px)"
+          >
+            <Smartphone size={14} />
+            <span>Narrow (320px)</span>
+          </button>
+        </div>
+
+        {/* State Simulation & Reset */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <label htmlFor="state-switcher" style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.04em', opacity: 0.7 }}>
+              State:
+            </label>
+            <select
+              id="state-switcher"
+              value={feedbackState}
+              onChange={(e) => setFeedbackState(e.target.value)}
+              className={themeClasses.input}
+              style={{
+                padding: '4px 8px',
+                fontSize: '0.8rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+              }}
+            >
+              <option value="default">Default State</option>
+              <option value="loading">Loading Skeleton</option>
+              <option value="error">Error Banner</option>
+              <option value="empty">Empty State</option>
+            </select>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            className={themeClasses.btnSecondary}
+            style={{ padding: '5px 10px', fontSize: '0.785rem', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+            title="Reset playground viewports, states, and filters"
+          >
+            <RotateCcw size={13} />
+            <span>Reset</span>
+          </button>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          4. Unified Stage Canvas: Elegant, Harmonious & Focused
           ========================================================================= */}
       <div
         style={{
@@ -439,7 +478,7 @@ export default function PlaygroundPage() {
           display: 'flex',
           justifyContent: 'center',
           overflowX: 'auto',
-          paddingBottom: '3rem',
+          paddingBottom: '2rem',
         }}
       >
         <div
@@ -455,7 +494,6 @@ export default function PlaygroundPage() {
             backgroundColor: 'transparent',
             display: 'flex',
             flexDirection: 'column',
-            gap: '2.5rem',
           }}
         >
           {/* Simulated Device Bezel Top Bar */}
@@ -465,7 +503,7 @@ export default function PlaygroundPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '10px 16px',
+                padding: '8px 14px',
                 backgroundColor: 'var(--site-ink)',
                 color: 'var(--site-bg)',
                 fontSize: '0.75rem',
@@ -474,9 +512,9 @@ export default function PlaygroundPage() {
                 borderRadius: '20px 20px 0 0',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }} />
-                <span>DEVICE SIMULATOR: {viewportPreset}</span>
+                <span>DEVICE PREVIEW: {viewportPreset}</span>
               </div>
               <button
                 type="button"
@@ -488,76 +526,84 @@ export default function PlaygroundPage() {
             </div>
           )}
 
-          {/* =======================================================================
-              5. Global Simulated Feedback State Overrides
-              ======================================================================= */}
-          {feedbackState === 'loading' && (
-            <section style={{ width: '100%' }}>
+          {/* Unified Primary Stage Canvas */}
+          <div
+            style={{
+              padding: '2.5rem 2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2.5rem',
+              ...getStageStyle(styleObj.id),
+            }}
+          >
+            {/* Global Simulated Feedback Overrides */}
+            {feedbackState === 'loading' && (
               <div
-                style={{
-                  padding: '2.5rem',
-                  borderRadius: '16px',
-                  textAlign: 'center',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <div style={{ height: '24px', width: '50%', backgroundColor: 'rgba(125, 125, 125, 0.2)', borderRadius: '6px', margin: '0 auto 1rem' }} />
-                <div style={{ height: '16px', width: '75%', backgroundColor: 'rgba(125, 125, 125, 0.15)', borderRadius: '4px', margin: '0 auto 1.5rem' }} />
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1.5rem' }}>
-                  <div style={{ height: '42px', width: '140px', backgroundColor: 'rgba(125, 125, 125, 0.25)', borderRadius: '8px' }} />
-                  <div style={{ height: '42px', width: '110px', backgroundColor: 'rgba(125, 125, 125, 0.15)', borderRadius: '8px' }} />
-                </div>
-                <p style={{ marginTop: '1.5rem', fontSize: '0.85rem', fontWeight: '700', opacity: 0.8 }}>
-                  Loading Skeleton Preview — Demonstrates responsive placeholder layout without simulated network stalling.
-                </p>
-              </div>
-            </section>
-          )}
-
-          {feedbackState === 'error' && (
-            <section style={{ width: '100%' }}>
-              <div
-                style={{
-                  padding: '1.75rem',
-                  border: '2px solid #ef4444',
-                  borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '12px',
-                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                }}
-              >
-                <AlertCircle size={28} color="#ef4444" style={{ flexShrink: 0 }} />
-                <div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#ef4444', margin: 0 }}>
-                    Simulated Error Presentation
-                  </h4>
-                  <p style={{ fontSize: '0.875rem', marginTop: '4px', lineHeight: 1.5 }}>
-                    This demonstrates how system faults or validation blocks are communicated honestly in {styleObj.label} style without fabricated telemetry errors.
-                  </p>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {feedbackState === 'empty' && (
-            <section style={{ width: '100%' }}>
-              <div
+                className={themeClasses.card}
                 style={{
                   padding: '3rem 2rem',
                   textAlign: 'center',
-                  borderRadius: '16px',
-                  ...getStageStyle(styleObj.id),
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '1rem',
                 }}
               >
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'rgba(125, 125, 125, 0.12)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                  <HelpCircle size={28} style={{ opacity: 0.7 }} />
+                <div style={{ height: '20px', width: '40%', backgroundColor: 'rgba(125, 125, 125, 0.2)', borderRadius: '6px' }} />
+                <div style={{ height: '14px', width: '65%', backgroundColor: 'rgba(125, 125, 125, 0.12)', borderRadius: '4px' }} />
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                  <div style={{ height: '38px', width: '130px', backgroundColor: 'rgba(125, 125, 125, 0.2)', borderRadius: '6px' }} />
+                  <div style={{ height: '38px', width: '100px', backgroundColor: 'rgba(125, 125, 125, 0.12)', borderRadius: '6px' }} />
                 </div>
-                <h4 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '0.5rem' }}>
-                  No Content Available (Empty State)
+                <p style={{ fontSize: '0.85rem', fontWeight: '700', opacity: 0.75, marginTop: '1rem' }}>
+                  Simulated Loading Skeleton State
+                </p>
+              </div>
+            )}
+
+            {feedbackState === 'error' && (
+              <div
+                style={{
+                  padding: '1.5rem',
+                  border: '1.5px solid #ef4444',
+                  borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '12px',
+                  backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '14px',
+                }}
+              >
+                <AlertCircle size={24} color="#ef4444" style={{ flexShrink: 0 }} />
+                <div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: '800', color: '#ef4444', margin: 0 }}>
+                    Simulated Error Presentation
+                  </h4>
+                  <p style={{ fontSize: '0.85rem', marginTop: '4px', lineHeight: 1.5, opacity: 0.9 }}>
+                    Shows how system faults or validation blocks communicate cleanly in {styleObj.label} style.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {feedbackState === 'empty' && (
+              <div
+                className={themeClasses.card}
+                style={{
+                  padding: '3rem 2rem',
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'rgba(125, 125, 125, 0.1)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
+                  <HelpCircle size={24} style={{ opacity: 0.7 }} />
+                </div>
+                <h4 style={{ fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem' }}>
+                  No Content Available
                 </h4>
-                <p style={{ fontSize: '0.9rem', opacity: 0.8, maxWidth: '480px', margin: '0 auto 1.5rem', lineHeight: 1.5 }}>
-                  Helpful empty states describe why no records appear and provide a clear, one-click corrective action.
+                <p style={{ fontSize: '0.875rem', opacity: 0.75, maxWidth: '420px', margin: '0 0 1.5rem', lineHeight: 1.5 }}>
+                  Helpful empty states describe why no records appear and provide a clear one-click corrective action.
                 </p>
                 <button
                   type="button"
@@ -568,454 +614,490 @@ export default function PlaygroundPage() {
                   Return to Default View
                 </button>
               </div>
-            </section>
-          )}
+            )}
 
-          {/* =======================================================================
-              6. Specimen Workbench Sections (11 Categories)
-              ======================================================================= */}
-
-          {/* Section: Foundations & Design DNA */}
-          {(activeCategory === 'all' || activeCategory === 'foundations') && (
-            <section id="foundations" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Foundations & Tokens
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Design DNA & Token System</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Core typography, color tokens, and elevation physics for {styleObj.label}.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  DNA SPECIMEN
-                </span>
-              </div>
-
-              <div
-                style={{
-                  padding: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.5rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                {/* Typography Scale Preview */}
-                <div>
-                  <h4 style={{ fontSize: '0.85rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.75rem', opacity: 0.75 }}>
-                    Typography Hierarchy ({styleObj.typography.split(';')[0]})
-                  </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    <div style={{ fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', fontWeight: '800', lineHeight: 1.15 }}>
-                      The Quick Brown Fox Jumps
-                    </div>
-                    <div style={{ fontSize: '1rem', lineHeight: 1.5, opacity: 0.85 }}>
-                      Design systems enforce rigor across components while respecting each style's genuine material constraints.
-                    </div>
-                    <div style={{ fontSize: '0.85rem', fontFamily: 'monospace', opacity: 0.7 }}>
-                      mono: const theme = "{styleObj.id}"; // Token scale: 12px, 14px, 16px, 24px, 36px
-                    </div>
-                  </div>
-                </div>
-
-                {/* Token Cards Grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
-                  <div className={themeClasses.card} style={{ padding: '1rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Motion Profile</span>
-                    <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.motionPersonality.split(';')[0]}</p>
-                  </div>
-                  <div className={themeClasses.card} style={{ padding: '1rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Material Quality Gate</span>
-                    <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.materialFidelityGate.split('.')[0]}</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Section: Buttons & Actions */}
-          {(activeCategory === 'all' || activeCategory === 'buttons') && (
-            <section id="buttons" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Interactive Actions
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Buttons & Feedback States</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Primary, secondary, icon-only, disabled, and toast notification triggers.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  INTERACTIVE
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenButtons styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: Navigation & Tabs */}
-          {(activeCategory === 'all' || activeCategory === 'navigation') && (
-            <section id="navigation" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Navigation
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Navigation & Tabs</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Accessible tab switching with panel transitions and keyboard support.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  WCAG AA ACCESSIBLE
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenTabs styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: Cards & Media */}
-          {(activeCategory === 'all' || activeCategory === 'cards') && (
-            <section id="cards" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Card Components
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Cards & Media Specimen</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Structured media presentation with original artwork, tags, and interactive like counts.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  RESPONSIVE GRID
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center' }}>
-                  <SpecimenImageCard
-                    styleId={styleObj.id}
-                    title="Tactile Architecture in Silicon"
-                    category="Design Systems"
-                    description="Real-time style routing and anti-slop verification applied across interactive web interfaces."
-                    author="Studio Archive"
-                    date="Nov 2026"
-                  />
-                  <SpecimenImageCard
-                    styleId={styleObj.id}
-                    title="Frosted Glass Material Physics"
-                    category="Refraction"
-                    description="Filtering differentiated background ambient light through 18px blur to make frosted glass visible."
-                    author="Kennedys Lab"
-                    date="Oct 2026"
-                  />
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Section: Forms & Controls */}
-          {(activeCategory === 'all' || activeCategory === 'forms') && (
-            <section id="forms" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Form Engine
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Forms & Validation Controls</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Text inputs, email, password reveal, selects, switches, file picker, and real client validation.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  FORM VALIDATION
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenForm styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: Auth Simulation Preview */}
-          {(activeCategory === 'all' || activeCategory === 'auth') && (
-            <section id="auth" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Authentication Specimen
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Auth Simulation Preview</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Authentic login & registration interface adhering to truthful front-end demo contracts.</p>
-                </div>
-                <Link
-                  to={`/${styleObj.id}/login`}
-                  className={themeClasses.btnSecondary}
-                  style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                >
-                  <ExternalLink size={14} />
-                  <span>Open Full-Screen Auth Demo</span>
-                </Link>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <div
-                  className={themeClasses.card}
-                  style={{ maxWidth: '440px', width: '100%', padding: '1.75rem', boxSizing: 'border-box' }}
-                >
-                  <div style={{ marginBottom: '1.25rem', textAlign: 'center' }}>
-                    <h4 style={{ fontSize: '1.2rem', fontWeight: '800' }}>Sign In to Studio</h4>
-                    <p style={{ fontSize: '0.85rem', opacity: 0.8, marginTop: '2px' }}>Front-end demo validation. No remote credentials stored.</p>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            {feedbackState === 'default' && (
+              <>
+                {/* Focused Category Header (when a single category is selected) */}
+                {isFocusedCategory && activeCategoryObj && (
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
                     <div>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '700', display: 'block', marginBottom: '4px' }}>Email Address</label>
-                      <input
-                        type="email"
-                        readOnly
-                        value="designer@example.com"
-                        className={themeClasses.input}
-                        style={{ width: '100%', fontSize: '0.9rem' }}
-                      />
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#8b5cf6' }}>
+                        Focused Category Specimen
+                      </span>
+                      <h2 style={{ fontSize: '1.4rem', fontWeight: '700', margin: '2px 0 0' }}>
+                        {activeCategoryObj.label}
+                      </h2>
+                      <p style={{ fontSize: '0.85rem', opacity: 0.8, marginTop: '2px' }}>
+                        {activeCategoryObj.desc}
+                      </p>
                     </div>
-                    <div>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '700', display: 'block', marginBottom: '4px' }}>Password</label>
-                      <input
-                        type="password"
-                        readOnly
-                        value="samplepassword"
-                        className={themeClasses.input}
-                        style={{ width: '100%', fontSize: '0.9rem' }}
-                      />
-                    </div>
-                    <Link
-                      to={`/${styleObj.id}/login`}
-                      className={themeClasses.btnPrimary}
-                      style={{ marginTop: '0.5rem', padding: '10px', textAlign: 'center', fontSize: '0.875rem' }}
+                    <button
+                      type="button"
+                      onClick={() => setActiveCategory('all')}
+                      className={themeClasses.btnSecondary}
+                      style={{ padding: '6px 14px', fontSize: '0.8rem', fontWeight: '700' }}
                     >
-                      Test Full Auth Flow
-                    </Link>
+                      Show All Specimens
+                    </button>
                   </div>
-                </div>
-              </div>
-            </section>
-          )}
+                )}
 
-          {/* Section: Dialogs & Overlays */}
-          {(activeCategory === 'all' || activeCategory === 'overlays') && (
-            <section id="overlays" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Overlays
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Dialogs & Overlays</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Accessible modal dialog with Escape key dismiss, backdrop focus trap, and trigger restoration.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  FOCUS TRAPPED
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenDialog styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: Data & Search Table */}
-          {(activeCategory === 'all' || activeCategory === 'data') && (
-            <section id="data" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Data Cockpit
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Data, Search & Filtering</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Search, category filtering, column sorting, and row selection on labeled sample data.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  SORTABLE TABLE
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  overflowX: 'auto',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenDataTable styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: FAQ & Disclosure */}
-          {(activeCategory === 'all' || activeCategory === 'disclosure') && (
-            <section id="disclosure" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Disclosures
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>FAQ Accordion</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Accessible expand/collapse panels with ARIA expanded states and keyboard controls.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  KEYBOARD ACCESSIBLE
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <SpecimenFAQ styleId={styleObj.id} />
-              </div>
-            </section>
-          )}
-
-          {/* Section: Feedback States Specimen */}
-          {(activeCategory === 'all' || activeCategory === 'feedback') && (
-            <section id="feedback" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    System Feedback
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Feedback States & Resilience</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Explicit visual feedback patterns for loading skeletons, alerts, and empty states.</p>
-                </div>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '3px 8px', borderRadius: '4px', backgroundColor: 'rgba(125, 125, 125, 0.12)' }}>
-                  FEEDBACK PATTERNS
-                </span>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                  gap: '1.5rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                {/* State 1: Skeleton */}
-                <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>1. Loading Skeleton</span>
-                  <div style={{ marginTop: '0.75rem' }}>
-                    <div style={{ height: '16px', width: '70%', backgroundColor: 'rgba(125,125,125,0.2)', borderRadius: '4px', marginBottom: '8px' }} />
-                    <div style={{ height: '12px', width: '90%', backgroundColor: 'rgba(125,125,125,0.12)', borderRadius: '4px', marginBottom: '8px' }} />
-                    <div style={{ height: '12px', width: '40%', backgroundColor: 'rgba(125,125,125,0.12)', borderRadius: '4px' }} />
-                  </div>
-                </div>
-
-                {/* State 2: Warning Banner */}
-                <div style={{ padding: '1.25rem', borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '8px', border: '1px solid rgba(239, 68, 68, 0.3)', backgroundColor: 'rgba(239, 68, 68, 0.08)' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', color: '#ef4444' }}>2. Error Banner</span>
-                  <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem', color: '#ef4444' }}>
-                    Authentication simulation prevented: Missing required parameter.
-                  </p>
-                </div>
-
-                {/* State 3: Empty State */}
-                <div className={themeClasses.card} style={{ padding: '1.25rem', textAlign: 'center' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>3. Empty State</span>
-                  <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem' }}>
-                    Zero matching records found.
-                  </p>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Section: Dashboard Module Preview */}
-          {(activeCategory === 'all' || activeCategory === 'dashboard') && (
-            <section id="dashboard" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '0.5rem', paddingBottom: '0.5rem', borderBottom: '1px solid rgba(125, 125, 125, 0.2)' }}>
-                <div>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--site-accent-secondary, #ff5757)' }}>
-                    Application Screen
-                  </span>
-                  <h3 style={{ fontSize: '1.35rem', fontWeight: '800', margin: '2px 0 0' }}>Dashboard Module Preview</h3>
-                  <p style={{ fontSize: '0.875rem', opacity: 0.85, marginTop: '2px' }}>Operational KPI cards, project summary metrics, and management controls.</p>
-                </div>
-                <Link
-                  to={`/${styleObj.id}/dashboard`}
-                  className={themeClasses.btnSecondary}
-                  style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                >
-                  <ExternalLink size={14} />
-                  <span>Open Full Dashboard Demo</span>
-                </Link>
-              </div>
-              <div
-                style={{
-                  padding: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.5rem',
-                  ...getStageStyle(styleObj.id),
-                }}
-              >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Specimen Coverage</span>
-                    <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>100%</div>
-                    <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>11 / 11 Categories Tested</span>
-                  </div>
-                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Anti-Slop Quality Gate</span>
-                    <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>Pass</div>
-                    <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>3-Tier Audit Verified</span>
-                  </div>
-                  <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Style Identity</span>
-                    <div style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '4px' }}>{styleObj.label}</div>
-                    <span style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: '700' }}>Active Token Profile</span>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Link
-                    to={`/${styleObj.id}/dashboard`}
-                    className={themeClasses.btnPrimary}
-                    style={{ padding: '10px 20px', fontSize: '0.85rem' }}
+                {/* Section 1: Buttons & Interactive Actions */}
+                {(activeCategory === 'all' || activeCategory === 'buttons') && (
+                  <div
+                    id="buttons"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
                   >
-                    Explore Interactive Dashboard
-                  </Link>
-                </div>
-              </div>
-            </section>
-          )}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Interactive Actions
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Buttons & Feedback States
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('buttons')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <SpecimenButtons styleId={styleObj.id} />
+                  </div>
+                )}
+
+                {/* Section 2: Form Controls & Validation */}
+                {(activeCategory === 'all' || activeCategory === 'forms') && (
+                  <div
+                    id="forms"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Form Engine
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Forms & Validation Controls
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('forms')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <SpecimenForm styleId={styleObj.id} />
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 3: Cards & Media Presentation */}
+                {(activeCategory === 'all' || activeCategory === 'cards') && (
+                  <div
+                    id="cards"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Card Components
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Cards & Media Specimens
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('cards')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center' }}>
+                      <SpecimenImageCard
+                        styleId={styleObj.id}
+                        title="Tactile Architecture in Silicon"
+                        category="Design Systems"
+                        description="Real-time style routing and anti-slop verification applied across interactive web interfaces."
+                        author="Studio Archive"
+                        date="Nov 2026"
+                      />
+                      <SpecimenImageCard
+                        styleId={styleObj.id}
+                        title="Frosted Glass Material Physics"
+                        category="Refraction"
+                        description="Filtering differentiated ambient light through 18px blur to make frosted glass visible."
+                        author="Kennedys Lab"
+                        date="Oct 2026"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 4: Navigation & Tabs */}
+                {(activeCategory === 'all' || activeCategory === 'navigation') && (
+                  <div
+                    id="navigation"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Navigation
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Navigation & Accessible Tabs
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('navigation')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <SpecimenTabs styleId={styleObj.id} />
+                  </div>
+                )}
+
+                {/* Section 5: Data & Search Table */}
+                {(activeCategory === 'all' || activeCategory === 'data') && (
+                  <div
+                    id="data"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Data Cockpit
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Data, Search & Filtering Table
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('data')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ overflowX: 'auto' }}>
+                      <SpecimenDataTable styleId={styleObj.id} />
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 6: Dialogs & Overlays */}
+                {(activeCategory === 'all' || activeCategory === 'overlays') && (
+                  <div
+                    id="overlays"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Overlays
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Dialogs & Accessible Modals
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('overlays')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <SpecimenDialog styleId={styleObj.id} />
+                  </div>
+                )}
+
+                {/* Section 7: FAQ & Disclosure */}
+                {(activeCategory === 'all' || activeCategory === 'disclosure') && (
+                  <div
+                    id="disclosure"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Disclosures
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          FAQ & Disclosure Accordion
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('disclosure')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <SpecimenFAQ styleId={styleObj.id} />
+                  </div>
+                )}
+
+                {/* Section 8: System Feedback Patterns */}
+                {(activeCategory === 'all' || activeCategory === 'feedback') && (
+                  <div
+                    id="feedback"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          System Feedback
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Feedback Patterns & Resilience
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('feedback')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>1. Loading Skeleton</span>
+                        <div style={{ marginTop: '0.75rem' }}>
+                          <div style={{ height: '14px', width: '70%', backgroundColor: 'rgba(125,125,125,0.2)', borderRadius: '4px', marginBottom: '8px' }} />
+                          <div style={{ height: '12px', width: '90%', backgroundColor: 'rgba(125,125,125,0.12)', borderRadius: '4px', marginBottom: '8px' }} />
+                          <div style={{ height: '12px', width: '40%', backgroundColor: 'rgba(125,125,125,0.12)', borderRadius: '4px' }} />
+                        </div>
+                      </div>
+
+                      <div style={{ padding: '1.25rem', borderRadius: styleObj.id === 'brutalism' ? '0px' : styleObj.id === 'claymorphism' ? '20px' : '8px', border: '1px solid rgba(239, 68, 68, 0.3)', backgroundColor: 'rgba(239, 68, 68, 0.08)' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', color: '#ef4444' }}>2. Error Banner</span>
+                        <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem', color: '#ef4444' }}>
+                          Authentication simulation prevented: Missing required parameter.
+                        </p>
+                      </div>
+
+                      <div className={themeClasses.card} style={{ padding: '1.25rem', textAlign: 'center' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>3. Empty State</span>
+                        <p style={{ fontSize: '0.85rem', fontWeight: '600', marginTop: '0.5rem' }}>
+                          Zero matching records found.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 9: Foundations & Design DNA */}
+                {(activeCategory === 'all' || activeCategory === 'foundations') && (
+                  <div
+                    id="foundations"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Foundations & Tokens
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Design DNA & Hierarchy
+                        </h3>
+                      </div>
+                      {!isFocusedCategory && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveCategory('foundations')}
+                          style={{ fontSize: '0.785rem', fontWeight: '700', opacity: 0.7, cursor: 'pointer', background: 'transparent', border: 'none', color: 'inherit' }}
+                        >
+                          Focus &rarr;
+                        </button>
+                      )}
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 'clamp(1.6rem, 2.5vw, 2.1rem)', fontWeight: '800', lineHeight: 1.2, marginBottom: '0.5rem' }}>
+                        The Quick Brown Fox Jumps
+                      </div>
+                      <p style={{ fontSize: '0.925rem', lineHeight: 1.5, opacity: 0.85, maxWidth: '680px' }}>
+                        Design systems enforce rigor across components while respecting each style's genuine material constraints.
+                      </p>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
+                      <div className={themeClasses.card} style={{ padding: '1rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Motion Profile</span>
+                        <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.motionPersonality.split(';')[0]}</p>
+                      </div>
+                      <div className={themeClasses.card} style={{ padding: '1rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Material Quality Gate</span>
+                        <p style={{ fontSize: '0.875rem', fontWeight: '700', marginTop: '4px' }}>{styleObj.materialFidelityGate.split('.')[0]}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 10: Auth Simulation Preview */}
+                {(activeCategory === 'all' || activeCategory === 'auth') && (
+                  <div
+                    id="auth"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Authentication Specimen
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Auth Simulation Preview
+                        </h3>
+                      </div>
+                      <Link
+                        to={`/${styleObj.id}/login`}
+                        className={themeClasses.btnSecondary}
+                        style={{ padding: '5px 10px', fontSize: '0.785rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+                      >
+                        <ExternalLink size={13} />
+                        <span>Open Demo</span>
+                      </Link>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div
+                        className={themeClasses.card}
+                        style={{ maxWidth: '400px', width: '100%', padding: '1.75rem', boxSizing: 'border-box' }}
+                      >
+                        <div style={{ marginBottom: '1.25rem', textAlign: 'center' }}>
+                          <h4 style={{ fontSize: '1.15rem', fontWeight: '800', margin: 0 }}>Sign In</h4>
+                          <p style={{ fontSize: '0.8rem', opacity: 0.75, marginTop: '2px' }}>Front-end demo validation. No credentials stored.</p>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                          <div>
+                            <label style={{ fontSize: '0.785rem', fontWeight: '700', display: 'block', marginBottom: '4px' }}>Email</label>
+                            <input
+                              type="email"
+                              readOnly
+                              value="designer@example.com"
+                              className={themeClasses.input}
+                              style={{ width: '100%', fontSize: '0.875rem' }}
+                            />
+                          </div>
+                          <div>
+                            <label style={{ fontSize: '0.785rem', fontWeight: '700', display: 'block', marginBottom: '4px' }}>Password</label>
+                            <input
+                              type="password"
+                              readOnly
+                              value="samplepassword"
+                              className={themeClasses.input}
+                              style={{ width: '100%', fontSize: '0.875rem' }}
+                            />
+                          </div>
+                          <Link
+                            to={`/${styleObj.id}/login`}
+                            className={themeClasses.btnPrimary}
+                            style={{ marginTop: '0.5rem', padding: '9px', textAlign: 'center', fontSize: '0.85rem' }}
+                          >
+                            Test Full Auth Flow
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Section 11: Dashboard Module Preview */}
+                {(activeCategory === 'all' || activeCategory === 'dashboard') && (
+                  <div
+                    id="dashboard"
+                    className={themeClasses.card}
+                    style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '1px solid rgba(125, 125, 125, 0.15)' }}>
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em', opacity: 0.65 }}>
+                          Application Screen
+                        </span>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '700', margin: '2px 0 0' }}>
+                          Dashboard Module Preview
+                        </h3>
+                      </div>
+                      <Link
+                        to={`/${styleObj.id}/dashboard`}
+                        className={themeClasses.btnSecondary}
+                        style={{ padding: '5px 10px', fontSize: '0.785rem', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+                      >
+                        <ExternalLink size={13} />
+                        <span>Open Dashboard</span>
+                      </Link>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Specimen Coverage</span>
+                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>100%</div>
+                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>11 / 11 Tested</span>
+                      </div>
+                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Anti-Slop Quality Gate</span>
+                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>Pass</div>
+                        <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: '700' }}>3-Tier Verified</span>
+                      </div>
+                      <div className={themeClasses.card} style={{ padding: '1.25rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', opacity: 0.7 }}>Style Identity</span>
+                        <div style={{ fontSize: '1.6rem', fontWeight: '800', marginTop: '4px' }}>{styleObj.label}</div>
+                        <span style={{ fontSize: '0.75rem', opacity: 0.8, fontWeight: '700' }}>Active Tokens</span>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                      <Link
+                        to={`/${styleObj.id}/dashboard`}
+                        className={themeClasses.btnPrimary}
+                        style={{ padding: '8px 18px', fontSize: '0.85rem' }}
+                      >
+                        Explore Interactive Dashboard
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
