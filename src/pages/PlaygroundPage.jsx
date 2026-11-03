@@ -483,6 +483,8 @@ export default function PlaygroundPage() {
       >
         <div
           data-taste-style={styleObj.id}
+          data-viewport={viewportPreset}
+          className="viewport-simulator-frame"
           key={resetNonce}
           style={{
             width: viewportPreset,
@@ -528,6 +530,7 @@ export default function PlaygroundPage() {
 
           {/* Unified Primary Stage Canvas */}
           <div
+            className="simulator-stage"
             style={{
               padding: '2.5rem 2rem',
               display: 'flex',

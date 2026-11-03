@@ -123,3 +123,385 @@ button {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Fluid Responsive Typography & Mobile UI/UX Scaling
+   Ensures text, buttons, inputs, and surfaces scale gracefully on real mobile
+   screens (320px–768px) and never bloat or break container bounds.
+   ========================================================================== */
+
+/* Real Device Responsive Breakpoints */
+@media (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14.5px;
+  }
+
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .neo-btn-primary, .neo-btn-secondary,
+  .glass-btn-primary, .glass-btn-secondary,
+  .clay-btn-primary, .clay-btn-secondary,
+  .brutal-btn-primary, .brutal-btn-secondary,
+  .bento-btn-primary, .bento-btn-secondary,
+  .skeuo-btn-primary, .skeuo-btn-secondary,
+  .ent-btn-primary, .ent-btn-secondary,
+  .term-btn-primary, .term-btn-secondary,
+  .swiss-btn-primary, .swiss-btn-secondary,
+  .mini-btn-primary, .mini-btn-secondary {
+    padding: 8px 16px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .neo-input, .glass-input, .clay-input-well,
+  .brutal-input, .bento-input, .skeuo-well,
+  .ent-input, .term-input, .swiss-input, .mini-input {
+    padding: 8px 12px !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13.5px;
+  }
+
+  h1 {
+    font-size: 1.7rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.3rem !important;
+    line-height: 1.25 !important;
+  }
+
+  h3 {
+    font-size: 1.125rem !important;
+    line-height: 1.3 !important;
+  }
+
+  h4 {
+    font-size: 0.95rem !important;
+  }
+
+  p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .neo-btn-primary, .neo-btn-secondary,
+  .glass-btn-primary, .glass-btn-secondary,
+  .clay-btn-primary, .clay-btn-secondary,
+  .brutal-btn-primary, .brutal-btn-secondary,
+  .bento-btn-primary, .bento-btn-secondary,
+  .skeuo-btn-primary, .skeuo-btn-secondary,
+  .ent-btn-primary, .ent-btn-secondary,
+  .term-btn-primary, .term-btn-secondary,
+  .swiss-btn-primary, .swiss-btn-secondary,
+  .mini-btn-primary, .mini-btn-secondary {
+    padding: 7px 13px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .neo-card, .glass-pane, .clay-card,
+  .brutal-card, .bento-tile, .skeuo-panel,
+  .ent-card, .term-window, .swiss-card, .mini-card {
+    padding: 1.25rem 0.875rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 12.5px;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.2rem !important;
+  }
+
+  h3 {
+    font-size: 1rem !important;
+  }
+
+  .neo-btn-primary, .neo-btn-secondary,
+  .glass-btn-primary, .glass-btn-secondary,
+  .clay-btn-primary, .clay-btn-secondary,
+  .brutal-btn-primary, .brutal-btn-secondary,
+  .bento-btn-primary, .bento-btn-secondary,
+  .skeuo-btn-primary, .skeuo-btn-secondary,
+  .ent-btn-primary, .ent-btn-secondary,
+  .term-btn-primary, .term-btn-secondary,
+  .swiss-btn-primary, .swiss-btn-secondary,
+  .mini-btn-primary, .mini-btn-secondary {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ==========================================================================
+   Viewport Simulator Typography & Component Scaling
+   Guarantees that when testing simulated Tablet (768px), Mobile (390px),
+   and Narrow (320px) on desktop monitors, all typography, buttons, inputs,
+   and surfaces shrink proportionately to prevent UI bloating.
+   ========================================================================== */
+
+/* Simulated Tablet (768px) */
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage {
+  padding: 1.75rem 1.25rem !important;
+  gap: 1.75rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage h1 {
+  font-size: 1.75rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage h2 {
+  font-size: 1.35rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage h3 {
+  font-size: 1.15rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage p {
+  font-size: 0.875rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .neo-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .neo-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .glass-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .glass-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .clay-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .clay-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .brutal-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .brutal-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .bento-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .bento-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .skeuo-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .skeuo-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .ent-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .ent-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .term-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .term-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .swiss-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .swiss-btn-secondary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .mini-btn-primary,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .mini-btn-secondary {
+  padding: 8px 16px !important;
+  font-size: 0.825rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .neo-card,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .glass-pane,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .clay-card,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .brutal-card,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .bento-tile,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .skeuo-panel,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .ent-card,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .term-window,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .swiss-card,
+.viewport-simulator-frame[data-viewport="768px"] .simulator-stage .mini-card {
+  padding: 1.5rem 1.25rem !important;
+}
+
+/* Simulated Mobile (390px) */
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage {
+  padding: 1.25rem 0.875rem !important;
+  gap: 1.25rem !important;
+  font-size: 0.825rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage h1 {
+  font-size: 1.45rem !important;
+  line-height: 1.2 !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage h2 {
+  font-size: 1.2rem !important;
+  line-height: 1.25 !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage h3 {
+  font-size: 1.05rem !important;
+  line-height: 1.3 !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage h4 {
+  font-size: 0.9rem !important;
+  line-height: 1.3 !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage p {
+  font-size: 0.825rem !important;
+  line-height: 1.45 !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage button[role="tab"] {
+  font-size: 0.785rem !important;
+  padding: 5px 9px !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage table th,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage table td {
+  padding: 8px 10px !important;
+  font-size: 0.785rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .neo-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .neo-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .glass-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .glass-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .clay-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .clay-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .brutal-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .brutal-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .bento-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .bento-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .skeuo-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .skeuo-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .ent-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .ent-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .term-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .term-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .swiss-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .swiss-btn-secondary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .mini-btn-primary,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .mini-btn-secondary {
+  padding: 7px 13px !important;
+  font-size: 0.785rem !important;
+  gap: 4px !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .neo-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .glass-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .clay-input-well,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .brutal-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .bento-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .skeuo-well,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .ent-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .term-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .swiss-input,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .mini-input {
+  padding: 7px 10px !important;
+  font-size: 0.825rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .neo-card,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .glass-pane,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .clay-card,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .brutal-card,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .bento-tile,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .skeuo-panel,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .ent-card,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .term-window,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .swiss-card,
+.viewport-simulator-frame[data-viewport="390px"] .simulator-stage .mini-card {
+  padding: 1.25rem 0.875rem !important;
+}
+
+/* Simulated Narrow Mobile (320px) */
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage {
+  padding: 1rem 0.625rem !important;
+  gap: 1rem !important;
+  font-size: 0.775rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage h1 {
+  font-size: 1.3rem !important;
+  line-height: 1.2 !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage h2 {
+  font-size: 1.1rem !important;
+  line-height: 1.25 !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage h3 {
+  font-size: 0.95rem !important;
+  line-height: 1.3 !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage h4 {
+  font-size: 0.85rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage p {
+  font-size: 0.775rem !important;
+  line-height: 1.4 !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage button[role="tab"] {
+  font-size: 0.725rem !important;
+  padding: 4px 7px !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage table th,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage table td {
+  padding: 6px 8px !important;
+  font-size: 0.725rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .neo-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .neo-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .glass-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .glass-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .clay-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .clay-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .brutal-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .brutal-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .bento-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .bento-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .skeuo-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .skeuo-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .ent-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .ent-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .term-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .term-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .swiss-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .swiss-btn-secondary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .mini-btn-primary,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .mini-btn-secondary {
+  padding: 6px 10px !important;
+  font-size: 0.725rem !important;
+  gap: 3px !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .neo-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .glass-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .clay-input-well,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .brutal-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .bento-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .skeuo-well,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .ent-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .term-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .swiss-input,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .mini-input {
+  padding: 6px 8px !important;
+  font-size: 0.775rem !important;
+}
+
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .neo-card,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .glass-pane,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .clay-card,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .brutal-card,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .bento-tile,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .skeuo-panel,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .ent-card,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .term-window,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .swiss-card,
+.viewport-simulator-frame[data-viewport="320px"] .simulator-stage .mini-card {
+  padding: 1rem 0.625rem !important;
+}
